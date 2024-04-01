@@ -6,11 +6,12 @@ using namespace std;
 
 class Person {
 public:
+	
 	Person(const string& name) {
 		this->name = name;
 
 	}
-	string& getName() { reutrn name; }
+	string& getName()  { return name; }
 
 private:
 	string name;
@@ -27,7 +28,8 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 class Group {
 public:
-	Group(int max_lenght) : {
+
+	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
@@ -42,7 +44,9 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			members[i].name == name && break;
+			if(members[i].name == name)
+				break;
+			
 		}
 		for (int index = i; index < size - 1; index++) {
 			members[index] = members[index + 1];
@@ -56,13 +60,13 @@ public:
 
 private:
 	int size;
-	const int cap;
+	int cap;
 	Person* members;
 
 };
 
 bool isGroupFull(Group g) {
-	return (p.size == p.cap);
+	return (g.size == g.cap);
 }
 
 int main()
@@ -92,6 +96,8 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	*/
+
+	
 
 
 
