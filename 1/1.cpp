@@ -96,6 +96,15 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	*/
+	Person persons[10];
+	for(int i=0;i<10;i++){
+		persons[i].getName()=to_string(rand()%100);
+	}
+	sort(persons,persons+10);//what operator should be overloaded for sort? :)
+
+	for(int i=0;i<10;i++){
+		cout<<persons[i].getName()<<' ';
+	}
 
 	
 
