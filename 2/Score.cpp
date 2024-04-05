@@ -10,6 +10,3 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 }
 
 
-void print(const Score& score) {
-	cout << score.score << '(' << to_string(score.label) << ") :" << score.detail << '\t';
-}

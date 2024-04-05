@@ -22,4 +22,4 @@ private:
 };
 
 
-void print(const Score& score);
+
