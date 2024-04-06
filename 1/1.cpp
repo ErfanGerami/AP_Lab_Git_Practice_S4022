@@ -1,25 +1,29 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
+class Group;
 class Person {
 public:
-	
+	friend class Group;
 	Person(){};
-	Person(const string& name) {
+	Person(const string& name) 
+	{
 		this->name = name;
-
 	}
+	Person(const string& name, const int& age) 
+	{
+		this->name = name;
+		this->age = age;
+	}
+
+	//int
 
 	string& getName() { return name; }
 	const string& getName() const { return name; }
 
 	friend ostream& operator<<(ostream& out, const Person& p);
-
-
-
 private:
 	string name;
 	int age;
@@ -31,36 +35,43 @@ ostream& operator<<(ostream& out, const Person& p)
 	return out;
 }
 
-
-
-
 class Group {
 public:
 
-	Group(int max_lenght)  {
+	Group(int max_lenght)  
+	{
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
-	void add(Person p) {
+
+	void add(Person p)
+	{
 		if (this->size == this->cap) {
 			return;
 		}
 		this->members[size] = p;
 		this->size++;
 	}
-	void deletePerson(string name) {
+
+	void deletePerson(string name) 
+	{
 		int i;
-		for (i = 0; i < size; i++) {
+		for (i = 0; i < size; i++) 
+		{
 			if(members[i].name == name)
 				break;
-			
 		}
-		for (int index = i; index < size - 1; index++) {
+		for (int index = i; index < size - 1; index++) 
+		{
 			members[index] = members[index + 1];
 		}
 		size--;
 	}
+
+	friend bool isGroupFull(Group g);
+	
+	friend ostream& operator<<(ostream& out, const Group& p);
 
 	~Group() {
 		delete[] members;
@@ -70,11 +81,16 @@ private:
 	int size;
 	int cap;
 	Person* members;
-
 };
 
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
+}
+
+ostream& operator<<(ostream& out, const Group& p) 
+{
+	
+	return out;
 }
 
 int main()
@@ -82,7 +98,7 @@ int main()
 	
 	Person p1("somename");
 	Person p2("somename2");
-	cout << p1<<p2;
+	cout << p1 << p2;
 	
 	
 	Group g1(5);
@@ -96,7 +112,7 @@ int main()
 	Group g2(g1);
 	Group g3(10);
 	g2.deletePerson("Erfan");
-	cout << g1<<endl;//should cout every person in it with a \t as the separator
+	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	
 	
