@@ -6,6 +6,7 @@ using namespace std;
 
 class Person {
 public:
+	friend class Group;
 	Person(){
 		name = "";
 		age = 0;
@@ -31,7 +32,7 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 class Group {
 public:
-
+	friend bool isGroupFull(Group g);
 	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
@@ -47,7 +48,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].getName() == name)
+			if(members[i].name == name)
 				break;
 			
 		}
@@ -55,12 +56,6 @@ public:
 			members[index] = members[index + 1];
 		}
 		size--;
-	}
-	int get_size(){
-		return this->size;
-	}
-	int get_cap(){
-		return this->cap;
 	}
 	~Group() {
 		delete[] members;
@@ -74,7 +69,7 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.get_size() == g.get_cap());
+	return (g.size == g.cap);
 }
 
 int main()
