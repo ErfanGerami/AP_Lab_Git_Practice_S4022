@@ -1,0 +1,7 @@
+.vs
+.vscode
+.idea
+*.exe
+1/*.exe
+2/*.exe
+
