@@ -9,10 +9,10 @@ public:
 	
 	Person(const string& name) {
 		this->name = name;
-
 	}
 	string& getName()  { return name; }
-
+	string getName() const  { return name; }
+	friend ostream& operator<<(ostream& out, const Person& p);
 private:
 	string name;
 	int age;
@@ -26,7 +26,8 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 
 
-class Group {
+
+/*class Group {
 public:
 
 	Group(int max_lenght)  {
@@ -67,23 +68,21 @@ private:
 
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
-}
+}*/
 
 int main()
 {
-	/*
 	Person p1("somename");
-	Person p1("somename2");
+	Person p2("somename2");
 	cout << p1<<p2;
-	*/
-	/*
-	Group g1(5);
+
+	/*Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;
-	*/
+	cout<<isGroupFull(g1)<<endl;*/
+
 	/*
 	Group g2(g1);
 	Group g3(10);
