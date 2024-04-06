@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
 class Person {
 public:
 	Person() :age(0) {
@@ -14,6 +13,7 @@ public:
 
 	}
 	friend ostream& operator<<(ostream& out, const Person& p);
+	friend  Group;
 	string& getName()  { return name; }
 	string getName()const { return name; }
 private:
@@ -47,7 +47,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].getName() == name)
+			if(members[i].name == name)
 				break;
 			
 		}
@@ -60,6 +60,7 @@ public:
 	~Group() {
 		delete[] members;
 	}
+	friend bool isGroupFull(Group g);
 
 private:
 	int size;
