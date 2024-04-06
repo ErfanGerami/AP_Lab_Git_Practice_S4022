@@ -19,5 +19,8 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 void Score:: setID_generator(int set_ID){
 	ID_generator = set_ID;
 }
+void print(const Score& score){
+	cout << "score : " << score.score << endl << "label : " << score.label  << endl << "detail : " << score.detail << endl << "ID" << score.ID ;
+}
 
 
