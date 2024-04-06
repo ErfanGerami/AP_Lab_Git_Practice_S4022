@@ -6,13 +6,16 @@ using namespace std;
 
 class Person {
 public:
-	
+	Person(){
+		name = "";
+		age = 0;
+	}
 	Person(const string& name) {
 		this->name = name;
 
 	}
-	string& getName()  { return name; }
-
+	string getName() const { return name; }
+	string& getName() { return name; }
 private:
 	string name;
 	int age;
@@ -44,7 +47,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].getName() == name)
 				break;
 			
 		}
@@ -53,7 +56,12 @@ public:
 		}
 		size--;
 	}
-
+	int get_size(){
+		return this->size;
+	}
+	int get_cap(){
+		return this->cap;
+	}
 	~Group() {
 		delete[] members;
 	}
@@ -66,7 +74,7 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.size == g.cap);
+	return (g.get_size() == g.get_cap());
 }
 
 int main()
