@@ -11,7 +11,7 @@ public:
 		this->name = name;
 
 	}
-	string& getName()  { return name; }
+	string getName() const { return name; }
 
 private:
 	string name;
@@ -33,6 +33,12 @@ public:
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
+	}
+	int get_size(){
+		return this->size;
+	}
+	int get_cap(){
+		return this->cap;
 	}
 	void add(Person p) {
 		if (this->size == this->cap) {
@@ -66,7 +72,7 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.size == g.cap);
+	return (g.get_size() == g.get_cap());
 }
 
 int main()
