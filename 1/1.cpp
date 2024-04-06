@@ -14,7 +14,7 @@ public:
 	Person():name(""),age(0){}
 	string& getName(){ return name; }
 	string getName()const {return name;}
-
+	friend class Group;
 private:
 	string name;
 	int age;
@@ -30,7 +30,7 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 class Group {
 public:
-
+	friend bool isGroupFull(Group g);
 	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
@@ -52,7 +52,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].getName() == name)
+			if(members[i].name == name)
 				break;
 			
 		}
@@ -74,7 +74,7 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.get_size() == g.get_cap());
+	return (g.size == g.cap);
 }
 
 int main()
