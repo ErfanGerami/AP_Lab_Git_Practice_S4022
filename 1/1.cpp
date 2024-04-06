@@ -11,6 +11,7 @@ public:
 		this->name = name;
 
 	}
+	Person():name(""),age(0){}
 	string getName() const { return name; }
 
 private:
