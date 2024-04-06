@@ -11,6 +11,7 @@ public:
 		BAD,
 	}Label;
 	Score();
+	Score();
 	void static setID_generator(int id_generator);
 	friend int main();
 	
