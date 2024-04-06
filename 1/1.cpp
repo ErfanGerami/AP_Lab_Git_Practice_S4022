@@ -33,6 +33,14 @@ public:
 		return *this;
 	};
 
+	bool operator<(const Person& other){
+		return this->name < other.name;
+	}
+
+	bool operator==(const Person& other){
+		return this->name == other.name;
+	}
+
 private:
 	string name;
 	int age;
@@ -122,17 +130,29 @@ public:
 	}
 
 	Group operator+=(const Group& other){
-		int i;
+		int oldMembersCount = this->size;
+
 		this->size += other.size;
+		this->cap += other.cap;
+		Person* oldMembers = new Person[oldMembersCount];
 
-		for (i = 0; i < this->size; i++)
+		for (size_t j = 0; j < oldMembersCount; j++)
 		{
-			result.members[i] = this->members[i];
+			oldMembers[j] = this->members[j];
 		}
+		
+		delete [] this->members;
 
-		for (size_t j = i; j < this->size; j++)
+		this->members = new Person[this->size];
+		
+		for (size_t i = 0; i < oldMembersCount; i++)
 		{
-			result.members[j] = this->members[j-i];
+			this->members[i] = oldMembers[i];
+		}
+		
+		for (size_t j = oldMembersCount; j < this->size; j++)
+		{
+			this->members[j] = other.members[j-oldMembersCount];
 		}
 		
 		return *this;
@@ -186,21 +206,22 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	
-	/*
-	Person persons[10];
-	Person Erfan("Erfan",20);
-	persons[1]=Erfan;
-	for(int i=0;i<10;i++){
-		persons[i].getName()=to_string(rand()%100);
-	}
-	sort(persons,persons+10);//what operator should be overloaded for sort? :)
+	
+	// Person persons[10];
+	// Person Erfan("Erfan",20);
+	// persons[1]=Erfan;
+	// for(int i=0;i<10;i++){
+	// 	persons[i].getName()=to_string(rand()%100);
+	// }
+	// sort(persons,persons+10); //what operator should be overloaded for sort? :)
 
-	for(int i=0;i<10;i++){
-		cout<<persons[i].getName()<<' ';
-	}*/
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	// for(int i=0;i<10;i++){
+	// 	cout<<persons[i].getName()<<' ';
+	// }
+
+	
+	// cout<<*find(persons,persons+10,Erfan);
+	
 
 
 }
