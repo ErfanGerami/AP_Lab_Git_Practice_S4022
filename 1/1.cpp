@@ -6,7 +6,6 @@ using namespace std;
 class Group;
 class Person {
 public:
-	
 	Person(const string& name) {
 		this->name = name;
 	}
@@ -21,6 +20,14 @@ public:
 	}
 	string& getName()  { return name; }
 	string getName() const  { return name; }
+	bool operator <(Person obj)
+	{
+		return age < obj.age; 
+	}
+	bool operator ==(Person const obj)
+	{
+		return age == obj.age; 
+	}
 	friend ostream& operator<<(ostream& out, const Person& p);
 	friend  Group;
 private:
@@ -28,15 +35,11 @@ private:
 	int age;
 
 };
-
-ostream& operator<<(ostream& out, const Person& p) {
+ostream& operator<<(ostream& out, const Person& p) 
+{
 	cout << p.getName();
 	return out;
 }
-
-
-
-
 class Group {
 public:
 
@@ -44,6 +47,17 @@ public:
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
+	}
+	Group(Group& obj)
+	{
+		size = obj.size;
+		cap = obj.cap;
+		members = new Person[size];
+		for(int i = 0; i < size; i++)
+			this->add(obj.members[i]);
+	}
+	~Group() {
+		delete[] members;
 	}
 	void add(Person p) {
 		if (this->size == this->cap) {
@@ -64,19 +78,38 @@ public:
 		}
 		size--;
 	}
-	friend bool isGroupFull(Group g);
-	~Group() {
-		delete[] members;
-	}
-	friend ostream& operator<<(ostream& out, Group& p);
 	Group& operator=(const Group& obj)
 	{
 		size = obj.size;
 		cap = obj.cap;
+		members = new Person[size];
 		for(int i = 0; i < size; i++)
 			this->add(obj.members[i]);
 		return *this;
 	}
+	Group operator +(Group obj) 
+	{
+		Group res(cap+obj.cap); 
+		int  i;
+		res.size = size + obj.size;
+		res.members = new Person[size+obj.size];
+		for(i = 0; i < size; i++)
+			res.members[i] = members[i];
+		for(i = 0; i < obj.size; i++)
+		{
+			res.members[i + size] = obj.members[i];
+		}
+		return res;
+	}
+	Group& operator +=(Group& obj)
+	{
+		Group temp(cap+obj.cap);
+		temp = *this + obj;
+		*this = temp;
+		return *this;
+	}
+	friend bool isGroupFull(Group g);
+	friend ostream& operator<<(ostream& out, Group& p);
 	friend Person;
 private:
 	int size;
@@ -84,15 +117,13 @@ private:
 	Person* members;
 
 };
-
 ostream& operator<<(ostream& out, Group& p) {
-for(int i = 0; i < p.size; i++)
-{
-	cout << p.members[i] << '\t';
+	for(int i = 0; i < p.size; i++)
+	{
+		cout << p.members[i] << '\t';
+	}
+	return out;
 }
-return out;
-}
-
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
 }
@@ -117,13 +148,12 @@ int main()
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	
-	/*
+	
 	g3 = g1;
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
-	*/
-	/*
+	
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -134,18 +164,8 @@ int main()
 
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
-	}*/
-	/*
+	}
+
 	cout<<*find(persons,persons+10,Erfan);
-	*/
-	
-
-
-
-
-
-
-
-
 }
 
