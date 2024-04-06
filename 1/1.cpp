@@ -6,7 +6,9 @@ using namespace std;
 
 class Person {
 public:
-	
+	Person() :age(0) {
+		name = "";
+	}
 	Person(const string& name) {
 		this->name = name;
 
