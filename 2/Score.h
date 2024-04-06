@@ -3,8 +3,9 @@
 using namespace std;
 class Score {
 public:
+	Score();
 	friend void print(const Score& score);
-	
+	void static setID_generator(int set_ID);
 	typedef enum {
 		GREAT,
 		GOOD,
@@ -13,6 +14,7 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	friend int main();
 private:
 	int score;
 	Label label;
