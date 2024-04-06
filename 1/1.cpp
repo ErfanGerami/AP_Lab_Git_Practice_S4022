@@ -6,13 +6,13 @@ using namespace std;
 
 class Person {
 public:
-	
+	Person (){}
 	Person(const string& name) {
 		this->name = name;
 
 	}
 	string& getName()  { return name; }
-
+	friend class Group;
 private:
 	string name;
 	int age;
@@ -44,7 +44,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].getName() == name)
 				break;
 			
 		}
@@ -53,11 +53,10 @@ public:
 		}
 		size--;
 	}
-
 	~Group() {
 		delete[] members;
 	}
-
+	friend bool isGroupFull(Group g);
 private:
 	int size;
 	int cap;
@@ -112,14 +111,5 @@ int main()
 	/*
 	cout<<*find(persons,persons+10,Erfan);
 	*/
-	
-
-
-
-
-
-
-
-
 }
 
