@@ -11,7 +11,8 @@ public:
 		this->name = name;
 
 	}
-	string& getName()  { return name; }
+	string& getName() { return name; }
+    string getName() const {return name;}
 
 private:
 	string name;
