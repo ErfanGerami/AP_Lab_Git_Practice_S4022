@@ -13,6 +13,7 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	static void setID_generator(static int h);
 private:
 	int score;
 	Label label;
