@@ -11,8 +11,19 @@ public:
 		this->name = name;
 
 	}
-	string& getName() { return name; }
+	Person() {
 
+		this->name = "";
+		this->age = 0;
+
+	}
+	Person(const string& N, const int ag) {
+		name = N;
+		age = ag;
+	}
+	string& getName() { return name; }
+	const string& getName()const { return name; }
+	friend Group;
 private:
 	string name;
 	int age;
@@ -44,7 +55,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if (members[i].name == name)
+			if (members[i].name == name) 
 				break;
 
 		}
