@@ -4,14 +4,26 @@
 #include <algorithm>
 using namespace std;
 
-class Person {
+class person {
 public:
 	
-	Person(const string& name) {
+	person(const string& name) {
 		this->name = name;
-
 	}
-	string& getName()  { return name; }
+	person(const string& _name,int _age) {
+		this->name = _name;
+		this->age = _age;
+	}
+	person() { name = ""; age = 0; }
+	string& getname()  { return name; }
+	string getname() const { return name; }
+	string setname(string _name) { name=_name; }
+	int setage(int _age) { age = _age; }
+
+	int getage() const { return age; }
+	friend ostream& operator<<(ostream& out, const person& p);
+
+	friend class Group;
 
 private:
 	string name;
@@ -19,8 +31,8 @@ private:
 
 };
 
-ostream& operator<<(ostream& out, const Person& p) {
-	cout << p.getName();
+ostream& operator<<(ostream& out, const person& p) {
+	cout << p.getname()<<endl;
 	return out;
 }
 
@@ -29,12 +41,12 @@ ostream& operator<<(ostream& out, const Person& p) {
 class Group {
 public:
 
-	Group(int max_lenght)  {
+	Group(int max_lenght) {
 		this->cap = max_lenght;
-		this->members = new Person[max_lenght];
+		this->members = new person[max_lenght];
 		this->size = 0;
 	}
-	void add(Person p) {
+	void add(person p) {
 		if (this->size == this->cap) {
 			return;
 		}
@@ -57,11 +69,12 @@ public:
 	~Group() {
 		delete[] members;
 	}
+	friend bool isGroupFull(Group g);
 
 private:
 	int size;
 	int cap;
-	Person* members;
+	person* members;
 
 };
 
@@ -71,26 +84,25 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	/*
-	Person p1("somename");
-	Person p1("somename2");
+	person p1("somename");
+	person p2("somename2");
 	cout << p1<<p2;
-	*/
-	/*
+	
+	
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
 	cout<<isGroupFull(g1)<<endl;
-	*/
-	/*
+	
+	
 	Group g2(g1);
 	Group g3(10);
 	g2.deletePerson("Erfan");
 	cout << g1<<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
-	*/
+
 	/*
 	g3 = g1;
 	cout << g3;
