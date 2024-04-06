@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include<string>
 using namespace std;
 
 class Person {
@@ -11,7 +12,10 @@ public:
 		this->name = name;
 
 	}
+	Person() {}
+	
 	string& getName()  { return name; }
+	string getName ()const  {  return  name; }
 
 private:
 	string name;
@@ -23,6 +27,7 @@ ostream& operator<<(ostream& out, const Person& p) {
 	cout << p.getName();
 	return out;
 }
+
 
 
 
@@ -41,10 +46,10 @@ public:
 		this->members[size] = p;
 		this->size++;
 	}
-	void deletePerson(string name) {
+	void deletePerson(const string &name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].getName() == name)
 				break;
 			
 		}
@@ -57,6 +62,8 @@ public:
 	~Group() {
 		delete[] members;
 	}
+	
+	friend bool isGroupFull(const Group& g);
 
 private:
 	int size;
@@ -65,7 +72,7 @@ private:
 
 };
 
-bool isGroupFull(Group g) {
+bool isGroupFull(const Group& g) {
 	return (g.size == g.cap);
 }
 
