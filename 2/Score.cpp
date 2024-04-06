@@ -7,6 +7,11 @@ Score::Score() :ID(Score::ID_generator){
 
 	ID_generator++;
 } 
+Score::Score(const Score& other): ID(other.ID){
+	this->score = other.score;
+	this->label = other.label;
+	this->detail = other.detail;
+}
 Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 	this->score = score;
 	this->label = label;

@@ -1,9 +1,12 @@
+#ifndef SCORE_H
+#define SCORE_H
 #include <iostream>
 #include <string>
 using namespace std;
 class Score {
 public:
 	Score();
+	Score(const Score& other);
 	friend void print(const Score& score);
 	void static setID_generator(int set_ID);
 	typedef enum {
@@ -25,3 +28,4 @@ private:
 
 
 
+#endif
