@@ -1,5 +1,5 @@
 #include "Score.h"
-
+int Score:: ID_generator = 0;
 Score::Score() :ID(Score::ID_generator){
 	this->score = 0;
 	this->label = GREAT;
