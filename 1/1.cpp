@@ -3,16 +3,26 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+class Group;
 class Person {
 public:
 	
 	Person(const string& name) {
 		this->name = name;
 	}
+	Person()
+	{
+		name = "";
+		age = 0;
+	}
+	Person(const string& name, int age) {
+		this->name = name;
+		this->age = age;
+	}
 	string& getName()  { return name; }
 	string getName() const  { return name; }
 	friend ostream& operator<<(ostream& out, const Person& p);
+	friend  Group;
 private:
 	string name;
 	int age;
@@ -27,7 +37,7 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 
 
-/*class Group {
+class Group {
 public:
 
 	Group(int max_lenght)  {
@@ -54,11 +64,20 @@ public:
 		}
 		size--;
 	}
-
+	friend bool isGroupFull(Group g);
 	~Group() {
 		delete[] members;
 	}
-
+	friend ostream& operator<<(ostream& out, Group& p);
+	Group& operator=(const Group& obj)
+	{
+		size = obj.size;
+		cap = obj.cap;
+		for(int i = 0; i < size; i++)
+			this->add(obj.members[i]);
+		return *this;
+	}
+	friend Person;
 private:
 	int size;
 	int cap;
@@ -66,9 +85,17 @@ private:
 
 };
 
+ostream& operator<<(ostream& out, Group& p) {
+for(int i = 0; i < p.size; i++)
+{
+	cout << p.members[i] << '\t';
+}
+return out;
+}
+
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
-}*/
+}
 
 int main()
 {
@@ -76,20 +103,20 @@ int main()
 	Person p2("somename2");
 	cout << p1<<p2;
 
-	/*Group g1(5);
+	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;*/
+	cout<<isGroupFull(g1)<<endl;
 
-	/*
+
 	Group g2(g1);
 	Group g3(10);
 	g2.deletePerson("Erfan");
-	cout << g1<<endl;//should cout every person in it with a \t as the separator
+	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
-	*/
+	
 	/*
 	g3 = g1;
 	cout << g3;
