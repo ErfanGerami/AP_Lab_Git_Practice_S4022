@@ -12,7 +12,8 @@ public:
 
 	}
 	Person():name(""),age(0){}
-	string getName() const { return name; }
+	string& getName(){ return name; }
+	string getName()const {return name;}
 
 private:
 	string name;
@@ -51,7 +52,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].getName() == name)
 				break;
 			
 		}
