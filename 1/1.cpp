@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -6,12 +5,23 @@ using namespace std;
 
 class Person {
 public:
-	
+	Person(const string& _name, int const _age)
+	{
+		name = _name;
+		age = _age;
+	}	
 	Person(const string& name) {
-		this->name = name;
 
+		this->name = name;
+		age = -1;
 	}
-	string& getName()  { return name; }
+	Person()
+	{
+		name = "";
+		age = -1;
+	}
+	string& getName() { return name; }
+	string getName() const {return name;}
 
 private:
 	string name;
@@ -71,11 +81,11 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	/*
+
 	Person p1("somename");
-	Person p1("somename2");
+	Person p2("somename2");
 	cout << p1<<p2;
-	*/
+
 	/*
 	Group g1(5);
 	g1.add({ "Erfan",20 });
