@@ -46,7 +46,7 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].getName() == name)
 				break;
 			
 		}
