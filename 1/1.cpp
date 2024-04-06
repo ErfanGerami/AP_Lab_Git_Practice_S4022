@@ -13,8 +13,9 @@ public:
 		this->name = name;
 
 	}
+	friend ostream& operator<<(ostream& out, const Person& p);
 	string& getName()  { return name; }
-
+	string getName()const { return name; }
 private:
 	string name;
 	int age;
@@ -55,7 +56,7 @@ public:
 		}
 		size--;
 	}
-
+	int getSize() {}
 	~Group() {
 		delete[] members;
 	}
