@@ -6,13 +6,21 @@ using namespace std;
 
 class Person {
 public:
-	
+	Person() {
+		name = "";
+		age = 0;
+	}
 	Person(const string& name) {
 		this->name = name;
 
 	}
+	Person(const string& name, const int age) {
+		this->name = name;
+		this->age = age;
+	}
 	string& getName()  { return name; }
 	string getName()const { return name; }
+	friend class Group;
 
 private:
 	string name;
@@ -58,6 +66,7 @@ public:
 	~Group() {
 		delete[] members;
 	}
+	friend bool isGroupFull(Group g);
 
 private:
 	int size;
@@ -72,19 +81,19 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	/*
+	
 	Person p1("somename");
-	Person p1("somename2");
+	Person p2("somename2");
 	cout << p1<<p2;
-	*/
-	/*
+	
+	
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
 	cout<<isGroupFull(g1)<<endl;
-	*/
+	
 	/*
 	Group g2(g1);
 	Group g3(10);
