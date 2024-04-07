@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 class Person {
@@ -17,6 +18,23 @@ public:
 	}
 	string& getName()  { return name; }
 	string getName()const { return name; } //me
+	bool operator < (const Person& other) const{ //me
+		return this->name < other.name;
+	}
+	bool operator ==(const Person& other) const { //me
+		return  this->name == other.name && this->age == other.age;
+	}
+	Person* find(Person* start, Person* end,const Person &goal){ //me
+		cout << "here";
+		for (Person* i = start; i < end; ++i) {
+			if (*i == goal) {
+				cout << "Hey";
+				return i;
+			}
+		}
+		cout << "can not find\n";
+		return end ;
+	}
 	friend class Group;
 private:
 	string name;
@@ -86,24 +104,25 @@ public:
 		}
 		return sum;
 	}
-	/*Group& operator+=(const Group& obj) { //me
+	Group& operator+=(const Group& obj) { //me
 		Group temp(this->cap);
 		temp.size = this->size;
+		int pirmary_size = obj.size;
 		for (int i = 0; i < this->size; ++i) {
 			temp.members[i] = this->members[i];
 		}
 		delete[] this->members;
-		this->size = this->size + obj.size;
+		this->size = temp.size + obj.size;
 		this->cap = this->cap + obj.cap;
 		this->members = new Person[this->cap];
-		for (int i = 0; i < temp.size; ++i) {
+		for (int i = 0; i < temp.size ; ++i) {
 			this->members[i] = temp.members[i];
 		}
-		/*for (int i = 0; i < obj.size; ++i) {
+		for (int i = 0; i < pirmary_size; ++i) {
 			this->members[temp.size + i] = obj.members[i];
-		}*/
+		}
 		return *this;
-	}*/
+	}
 
 	friend bool isGroupFull(Group ); //me
 	friend ostream& operator<<(ostream& ,const Group& ); //me
@@ -150,30 +169,31 @@ int main()
 	Group g3(10);
 	g2.deletePerson("Erfan");
 	cout << g1<<endl;//should cout every person in it with a \t as the separator
-	cout << g2 << endl;
+	cout << g2 << endl ;
 	
 	
 	g3 = g1 ;
 	cout << g3  ;
 	g3 =  g2 + g3 ;//adds members of g2 and g3 to each other
-	cout << g3;
 	g3 += g3 += g3 += g3;
 	
-	/*
+	
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
 	for(int i=0;i<10;i++){
+
 		persons[i].getName()=to_string(rand()%100);
 	}
 	sort(persons,persons+10);//what operator should be overloaded for sort? :)
 
-	for(int i=0;i<10;i++){
+	for (int i = 0;i<10;i++) {
 		cout<<persons[i].getName()<<' ';
-	}*/
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	}
+	
+	
+	find(persons,persons+10,Erfan);
+	
 	
 
 
