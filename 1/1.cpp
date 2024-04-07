@@ -56,6 +56,28 @@ public:
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
+	Group(const Group& other) {
+        this->cap = other.cap;
+        this->size = other.size;
+        this->members = new Person[other.cap];
+
+        for (int i = 0; i < other.size; i++) {
+            this->members[i] = other.members[i];
+        }
+    }
+	Group& operator=(const Group& other) {
+        if (this != &other) {
+            delete[] members;
+            this->cap = other.cap;
+            this->size = other.size;
+            this->members = new Person[other.cap];
+
+            for (int i = 0; i < other.size; i++) {
+                this->members[i] = other.members[i];
+            }
+        }
+        return *this;
+    }
 	void add(Person p) {
 		if (this->size == this->cap) {
 			return;
@@ -67,13 +89,16 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if (members[i].name == name)
 				break;
-			
+		}
+		if (i == size) {
+			return;
 		}
 		for (int index = i; index < size - 1; index++) {
 			members[index] = members[index + 1];
 		}
+		members[size - 1].getName() = "";
 		size--;
 	}
 	Group operator+(Group g)
@@ -83,15 +108,23 @@ public:
 		{
 			res.members[i] = this->members[i];
 		}
-		for(int i = this->size;i < (this->size + g.size);++i)
+		for(int i = this->size, j = 0;i < (this->size + g.size);++i, ++j)
 		{
-			res.members[i] = g.members[i];
+			res.members[i] = g.members[j];
 		}
 		res.size = this->size + g.size;
 		res.cap = this->size + g.size;
 		return res;
 	}
-
+	Group operator+= (Group g)///////////cap
+	{
+		for(int i = this->size, j = 0;i < (this->size + g.size);++i, ++j)
+		{
+			this->members[i] = g.members[j];
+			this->size++;
+		}
+		return *this;
+	}
 	friend ostream& operator<< (ostream& out, const Group &g);
 
 	~Group() {
@@ -144,6 +177,7 @@ int main()
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
+
 	
 	/*
 	Person persons[10];
