@@ -4,6 +4,8 @@
 #include <algorithm>
 using namespace std;
 
+#define MAX_SIZE 100
+
 class Person {
 public:
 	
@@ -42,7 +44,13 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 class Group {
 public:
-
+/* 	Group()
+	{
+		size = 0;
+		cap = 0;
+		members = new Person[MAX_SIZE];
+	} */
+\
 	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
@@ -68,6 +76,22 @@ public:
 		}
 		size--;
 	}
+	Group operator+(Group g)
+	{
+		Group res(this->size + g.size);
+		for(int i = 0;i < (this->size);++i)
+		{
+			res.members[i] = this->members[i];
+		}
+		for(int i = this->size;i < (this->size + g.size);++i)
+		{
+			res.members[i] = g.members[i];
+		}
+		res.size = this->size + g.size;
+		res.cap = this->size + g.size;
+		return res;
+	}
+
 	friend ostream& operator<< (ostream& out, const Group &g);
 
 	~Group() {
@@ -115,12 +139,12 @@ int main()
 	cout << g1<<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	
-	/*
+	
 	g3 = g1;
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
-	*/
+	
 	/*
 	Person persons[10];
 	Person Erfan("Erfan",20);
