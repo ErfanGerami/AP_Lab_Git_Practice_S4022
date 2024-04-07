@@ -22,7 +22,8 @@ public:
 	string getName() const  { return name; }
 	bool operator <(Person obj)
 	{
-		return age < obj.age; 
+		int res = name.compare(obj.name);
+		return res > 0? 1 : 0;
 	}
 	bool operator ==(Person const obj)
 	{
@@ -50,10 +51,10 @@ public:
 	}
 	Group(Group& obj)
 	{
-		size = obj.size;
+		size = 0;
 		cap = obj.cap;
-		members = new Person[size];
-		for(int i = 0; i < size; i++)
+		members = new Person[obj.cap];
+		for(int i = 0; i < obj.size; i++)
 			this->add(obj.members[i]);
 	}
 	~Group() {
@@ -80,10 +81,10 @@ public:
 	}
 	Group& operator=(const Group& obj)
 	{
-		size = obj.size;
+		size = 0;
 		cap = obj.cap;
-		members = new Person[size];
-		for(int i = 0; i < size; i++)
+		members = new Person[obj.cap];
+		for(int i = 0; i < obj.size; i++)
 			this->add(obj.members[i]);
 		return *this;
 	}
@@ -92,7 +93,7 @@ public:
 		Group res(cap+obj.cap); 
 		int  i;
 		res.size = size + obj.size;
-		res.members = new Person[size+obj.size];
+		res.members = new Person[cap+obj.cap];
 		for(i = 0; i < size; i++)
 			res.members[i] = members[i];
 		for(i = 0; i < obj.size; i++)
@@ -166,6 +167,6 @@ int main()
 		cout<<persons[i].getName()<<' ';
 	}
 
-	cout<<*find(persons,persons+10,Erfan);
+	cout<< *find(persons,persons+10,Erfan);
 }
 
