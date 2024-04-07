@@ -34,5 +34,25 @@ void Score :: setID_generator(int _ID)
 {
 	ID_generator = _ID;
 }
-
+void print(const Score& score)
+{
+	cout << "Score:" << score.score << endl;
+	cout << "Lable:";
+	switch (score.label)
+	{
+		case 0:
+			cout << "GREAT\n";
+			break;
+		case 1:
+			cout << "GOOD\n";
+			break;
+		case 2:
+			cout << "NOTBAD\n";
+			break;
+		case 3:
+			cout << "BAD\n";
+			break;
+	}
+	cout << "Detail:" << score.detail << endl;
+}
 
