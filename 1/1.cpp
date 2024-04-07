@@ -27,7 +27,8 @@ public:
 	}
 	bool operator ==(Person const obj)
 	{
-		return age == obj.age; 
+		int res = name.compare(obj.name);
+		return res == 0? 1 : 0; 
 	}
 	friend ostream& operator<<(ostream& out, const Person& p);
 	friend  Group;
