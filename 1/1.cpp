@@ -69,12 +69,62 @@ public:
 		size--;
 	}
 
+	Group operator+(Group g)
+	{
+		Group return_value(this->cap + g.cap);
+		return_value.size = this->size + g.size;
+
+		int i = 0;
+		for (i; i < this->size; i++)
+		{
+			return_value.members[i] = this->members[i];
+		}
+		for (int j = 0; j < this->size; j++, i++)
+		{
+			return_value.members[i] = g.members[j];
+		}
+		return return_value;
+	}
+
+	Group operator+=(Group g)
+	{
+		Group return_value(this->cap + g.cap);
+		return_value.size = this->size + g.size;
+
+		int i = 0;
+		for (i; i < this->size; i++)
+		{
+			return_value.members[i] = this->members[i];
+		}
+		for (int j = 0; j < this->size; j++, i++)
+		{
+			return_value.members[i] = g.members[j];
+
+		}
+
+		this->size = return_value.size;
+		this->cap = return_value.cap;
+		delete[] this->members;
+		this->members = new Person[this->cap];
+		for (i = 0; i < return_value.size; i++)
+		{
+			this->members[i] = return_value.members[i];
+		}
+
+		return return_value;
+	}
+
 	friend bool isGroupFull(Group g);
 	
 	friend ostream& operator<<(ostream& out, const Group& p);
 
-	~Group() {
-		delete[] members;
+	~Group() 
+	{
+		if (this->size > 0)
+		{
+			delete[] members;
+		}
+		this->size = 0;
 	}
 
 private:
@@ -83,23 +133,27 @@ private:
 	Person* members;
 };
 
-bool isGroupFull(Group g) {
+bool isGroupFull(Group g) 
+{
 	return (g.size == g.cap);
 }
 
 ostream& operator<<(ostream& out, const Group& p) 
 {
-	
+	for (int i = 0; i < p.size; i++)
+	{
+		out << p.members[i] << "\t";
+	}
 	return out;
 }
 
 int main()
 {
-	
+	/*
 	Person p1("somename");
 	Person p2("somename2");
 	cout << p1 << p2;
-	
+	*/
 	
 	Group g1(5);
 	g1.add({ "Erfan",20 });
@@ -121,7 +175,7 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	
-	
+	/*
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -135,5 +189,6 @@ int main()
 	}
 	
 	cout<<*find(persons,persons+10,Erfan);
+	*/
 }
 
