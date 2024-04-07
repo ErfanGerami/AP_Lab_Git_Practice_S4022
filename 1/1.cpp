@@ -97,7 +97,19 @@ public:
 	}
 
 	friend ostream &operator<<(ostream &out, const Group &g);
-	Group& operator+(const Group &other)
+	Group& operator=(const Group& other) {
+    if (this != &other) { 
+        delete[] this->members;
+        this->size = other.size;
+        this->cap = other.cap;
+        this->members = new Person[this->cap];
+        for (int i = 0; i < this->size; ++i) {
+            this->members[i] = other.members[i];
+        }
+    }
+    return *this;
+}
+	Group operator+(const Group &other)
 	{
 		int newCapacity = this->cap + other.cap;
 		Group result(newCapacity);
@@ -116,24 +128,19 @@ public:
 
 	Group &operator+=(const Group &other)
 	{
-		if (this->size + other.size > this->cap)
+		int newCapacity = this->cap + other.cap;
+		Group result(newCapacity);
+
+		for (int i = 0; i < this->size; ++i)
 		{
-			int newCapacity = this->size + other.size;
-			Person *temp = new Person[newCapacity];
-			for (int i = 0; i < this->size; ++i)
-			{
-				temp[i] = this->members[i];
-			}
-			delete[] this->members;
-			this->members = temp;
-			this->cap = newCapacity;
+			result.members[result.size++] = this->members[i];
 		}
 
 		for (int i = 0; i < other.size; ++i)
 		{
-			this->members[this->size++] = other.members[i];
+			result.members[result.size++] = other.members[i];
 		}
-
+		(*this)=result;
 		return *this;
 	}
 
@@ -181,7 +188,6 @@ int main()
 	g3 = g2 + g3; // adds members of g2 and g3 to each other
 	int x = 2;
 	g3 += g3 += g3 += g3;
-
 	Person persons[10];
 	Person Erfan("Erfan", 20);
 	persons[1] = Erfan;
