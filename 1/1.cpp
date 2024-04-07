@@ -190,7 +190,6 @@ int main()
 	g3 = g1;
 	cout << g3;
 	g3 = g2 + g3; // adds members of g2 and g3 to each other
-	int x = 2;
 	g3 += g3 += g3 += g3;
 	Person persons[10];
 	Person Erfan("Erfan", 20);
