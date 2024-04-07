@@ -101,7 +101,7 @@ public:
 	~Group() {
 		delete[] members;
 	}
-
+friend bool isGroupFull(Group g) ;
 private:
 	int size;
 	int cap;
@@ -110,8 +110,9 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.get_size() == g.get_cap());
+	return (g.size == g.cap);
 }
+
 
 Group& Group::operator=(const Group& obj)
 {
