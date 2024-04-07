@@ -8,14 +8,19 @@ public:
 	Person() :age(0) {
 		name = "";
 	}
+	Person(const string& name1, const int age1) :age(age1), name(name1) {}
 	Person(const string& name) {
 		this->name = name;
 
 	}
 	friend ostream& operator<<(ostream& out, const Person& p);
-	friend  Group;
-	string& getName()  { return name; }
+	friend class Group;
+	string& getName() { return name; }
 	string getName()const { return name; }
+	void operator=(Person a) {
+		this->age = a.age;
+		this->name = a.name;
+	}
 private:
 	string name;
 	int age;
@@ -32,10 +37,16 @@ ostream& operator<<(ostream& out, const Person& p) {
 class Group {
 public:
 
-	Group(int max_lenght)  {
+	Group(int max_lenght) {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
+	}
+	Group(Group& copy):size(copy.size),cap(copy.cap) {
+		this->members = new Person[cap];
+		for (int i = 0; i < size; i++) {
+			members[i] = copy.members[i];
+		}
 	}
 	void add(Person p) {
 		if (this->size == this->cap) {
@@ -47,21 +58,20 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if (members[i].name == name)
 				break;
-			
+
 		}
 		for (int index = i; index < size - 1; index++) {
 			members[index] = members[index + 1];
 		}
 		size--;
 	}
-	int getSize() {}
 	~Group() {
 		delete[] members;
 	}
 	friend bool isGroupFull(Group g);
-
+	friend ostream& operator<<(ostream& out, const Group& g);
 private:
 	int size;
 	int cap;
@@ -69,32 +79,34 @@ private:
 
 };
 
+ostream& operator<<(ostream& out, const Group& g) {
+	for (int i = 0; i < g.size; i++) {
+		out << g.members[i] << "\t";
+	}
+	return out;
+}
+
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
 }
 
 int main()
 {
-	/*
 	Person p1("somename");
-	Person p1("somename2");
-	cout << p1<<p2;
-	*/
-	/*
+	Person p2("somename2");
+	cout << p1 << p2;
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;
-	*/
-	/*
+	cout << isGroupFull(g1) << endl;
+
 	Group g2(g1);
 	Group g3(10);
 	g2.deletePerson("Erfan");
-	cout << g1<<endl;//should cout every person in it with a \t as the separator
+	cout << g1 << endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
-	*/
 	/*
 	g3 = g1;
 	cout << g3;
@@ -116,7 +128,7 @@ int main()
 	/*
 	cout<<*find(persons,persons+10,Erfan);
 	*/
-	
+
 
 
 
