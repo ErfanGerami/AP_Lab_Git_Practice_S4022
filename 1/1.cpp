@@ -72,6 +72,43 @@ public:
 	}
 	friend bool isGroupFull(Group g);
 	friend ostream& operator<<(ostream& out, const Group& g);
+	Group operator+(Group c) {
+		Group result(size+c.size);
+		for (int i = 0; i < size; i++) {
+			result.add(members[i]);
+		}
+		for (int i = 0; i < c.size; i++) {
+			result.add(c.members[i]);
+		}
+		return result;
+	}
+	Group& operator +=(Group c) {
+		if (cap < size + c.size) {
+			Person* n = new Person[size];
+			for (int i = 0; i < size; i++) {
+				n[i] = members[i];
+			}
+			delete[] members;
+			members = new Person[size + c.size];
+			for (int i = 0; i < size; i++) {
+				members[i] = n[i];
+			}
+			cap = size + c.size;
+		}
+		for (int i = 0; i < c.size;i++) {
+			this->add(c.members[i]);
+		}
+		return *this;
+	}
+	void operator=(Group c) {
+		delete[] members;
+		members = new Person[c.cap];
+		cap = c.cap;
+		size = c.size;
+		for (int i = 0; i < c.cap; i++) {
+			members[i] = c.members[i];
+		}
+	}
 private:
 	int size;
 	int cap;
@@ -107,12 +144,12 @@ int main()
 	g2.deletePerson("Erfan");
 	cout << g1 << endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
-	/*
+	
 	g3 = g1;
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
-	*/
+	cout << endl << g3;
 	/*
 	Person persons[10];
 	Person Erfan("Erfan",20);
