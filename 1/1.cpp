@@ -7,12 +7,18 @@ using namespace std;
 class Person {
 public:
 	
+	Person()
+	{
+       name=" ";
+	   age=0;
+	}
 	Person(const string& name) {
 		this->name = name;
 
 	}
 	string& getName() { return name; }
     string getName() const {return name;}
+	friend class Group;
 
 private:
 	string name;
@@ -30,22 +36,40 @@ ostream& operator<<(ostream& out, const Person& p) {
 class Group {
 public:
 
+    Group() : size(0),cap(0)
+    {
+        this->members = new Person[0];
+    }
+
 	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
-	void add(Person p) {
-		if (this->size == this->cap) {
+
+
+   Group & operator=(Group const &obj);
+
+	 void add(const Person& newGuest) {
+        if (this->size == this->cap) {
 			return;
 		}
-		this->members[size] = p;
+		this->members[size] = newGuest;
 		this->size++;
-	}
+    }
+
+	// void add(const Person &p) {
+	// 	if (this->size == this->cap) {
+	// 		return;
+	// 	}
+	// 	this->members[size] = p;
+	// 	this->size++;
+	// }
+
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if(members[i].name ==name)
 				break;
 			
 		}
@@ -55,6 +79,25 @@ public:
 		size--;
 	}
 
+	void set_size(int _size)
+	{
+        size=_size;
+	}
+
+	void set_cap(int _cap)
+	{
+		   cap=_cap;
+	}
+    
+	int get_size()
+	{
+		return size;
+	}
+
+	int get_cap()
+	{
+		return cap;
+	}
 	~Group() {
 		delete[] members;
 	}
@@ -67,16 +110,24 @@ private:
 };
 
 bool isGroupFull(Group g) {
-	return (g.size == g.cap);
+	return (g.get_size() == g.get_cap());
 }
+
+Group& Group::operator=(const Group& obj)
+{
+    size= obj.size;
+    cap = obj.cap;
+    return *this;
+}
+
 
 int main()
 {
-	/*
+	
 	Person p1("somename");
-	Person p1("somename2");
-	cout << p1<<p2;
-	*/
+	Person p2("somename2");
+	cout << p1<<endl<<p2;
+	
 	/*
 	Group g1(5);
 	g1.add({ "Erfan",20 });
