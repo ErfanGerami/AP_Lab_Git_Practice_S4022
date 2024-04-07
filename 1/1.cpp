@@ -21,7 +21,7 @@ public:
 	//int
 
 	string& getName() { return name; }
-	const string& getName() const { return name; }
+	const string& getName() const{ return name; }
 
 	friend ostream& operator<<(ostream& out, const Person& p);
 private:
@@ -37,7 +37,7 @@ ostream& operator<<(ostream& out, const Person& p)
 
 class Group {
 public:
-
+	friend class Person;
 	Group(int max_lenght)  
 	{
 		this->cap = max_lenght;
@@ -120,11 +120,7 @@ public:
 
 	~Group() 
 	{
-		if (this->size > 0)
-		{
-			delete[] members;
-		}
-		this->size = 0;
+		delete[] members;
 	}
 
 private:
@@ -142,7 +138,7 @@ ostream& operator<<(ostream& out, const Group& p)
 {
 	for (int i = 0; i < p.size; i++)
 	{
-		out << p.members[i] << "\t";
+		out << p.members[i].getName() << "\t";
 	}
 	return out;
 }
@@ -160,7 +156,8 @@ int main()
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;
+
+	cout << isGroupFull(g1) << endl;
 	
 	
 	Group g2(g1);
@@ -169,7 +166,7 @@ int main()
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	
-	
+	/*
 	g3 = g1;
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
