@@ -97,18 +97,21 @@ public:
 	}
 
 	friend ostream &operator<<(ostream &out, const Group &g);
-	Group& operator=(const Group& other) {
-    if (this != &other) { 
-        delete[] this->members;
-        this->size = other.size;
-        this->cap = other.cap;
-        this->members = new Person[this->cap];
-        for (int i = 0; i < this->size; ++i) {
-            this->members[i] = other.members[i];
-        }
-    }
-    return *this;
-}
+	Group &operator=(const Group &other)
+	{
+		if (this != &other)
+		{
+			delete[] this->members;
+			this->size = other.size;
+			this->cap = other.cap;
+			this->members = new Person[this->cap];
+			for (int i = 0; i < this->size; ++i)
+			{
+				this->members[i] = other.members[i];
+			}
+		}
+		return *this;
+	}
 	Group operator+(const Group &other)
 	{
 		int newCapacity = this->cap + other.cap;
@@ -140,7 +143,7 @@ public:
 		{
 			result.members[result.size++] = other.members[i];
 		}
-		(*this)=result;
+		(*this) = result;
 		return *this;
 	}
 
@@ -157,6 +160,7 @@ ostream &operator<<(ostream &out, const Group &g)
 	{
 		out << "\n member" << i + 1 << ":" << g.members[i].getName();
 	}
+	out << "\n";
 	return out;
 }
 bool isGroupFull(Group g)
@@ -201,5 +205,11 @@ int main()
 	{
 		cout << persons[i].getName() << ' ';
 	}
-	cout << *find(persons, persons + 10, Erfan);
+	auto it=find(persons, persons + 10, Erfan);
+	if (it!=persons+10){
+		cout<<*it;
+	}
+	else {
+		cout<<"\n the person is not found!";
+	}
 }
