@@ -87,11 +87,10 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	/*
 	Person p1("somename");
 	Person p1("somename2");
+	Person p2("somename2");
 	cout << p1<<p2;
-	*/
 	/*
 	Group g1(5);
 	g1.add({ "Erfan",20 });
