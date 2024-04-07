@@ -11,7 +11,20 @@ public:
 		this->name = name;
 
 	}
+
+	Person(string _name, int _age)
+	{
+		name = _name;
+		age = _age;
+	}
+	Person()
+	{
+		name = " ";
+		age = 0;
+	}
+	string getName() const {return name;}
 	string& getName()  { return name; }
+	friend class Group;
 
 private:
 	string name;
@@ -20,9 +33,10 @@ private:
 };
 
 ostream& operator<<(ostream& out, const Person& p) {
-	cout << p.getName();
+	out << p.getName();
 	return out;
 }
+
 
 
 
@@ -41,6 +55,7 @@ public:
 		this->members[size] = p;
 		this->size++;
 	}
+
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
@@ -57,6 +72,7 @@ public:
 	~Group() {
 		delete[] members;
 	}
+	friend bool isGroupFull(Group g);
 
 private:
 	int size;
