@@ -84,22 +84,22 @@ public:
 	}
 
 
-	Group operator+(Group &g)
-	{
-		Group return_value(this->cap + g.cap);
-		return_value.size = this->size + g.size;
-		return_value.members = new Person[return_value.cap];
-		int i = 0;
-		for (i; i < this->size; i++)
-		{
-			return_value.members[i] = this->members[i];
-		}
-		for (int j = 0; j < this->size; j++, i++)
-		{
-			return_value.members[i] = g.members[j];
-		}
-		return return_value;  //g = g1 + g2
-	}
+	Group operator+(const Group &g) const
+{
+    Group return_value(this->cap + g.cap);
+    return_value.size = this->size + g.size;
+    return_value.members = new Person[return_value.cap];
+    int i = 0;
+    for (i = 0; i < this->size; i++)
+    {
+        return_value.members[i] = this->members[i];
+    }
+    for (int j = 0; j < g.size; j++, i++)
+    {
+        return_value.members[i] = g.members[j];
+    }
+    return return_value;  // g = g1 + g2
+}
 
 	Group operator+=(Group &g)
 	{
@@ -184,7 +184,7 @@ int main()
 	
 	/*g3 = g1;
 	cout << g3;*/
-	g3 = g2 + g3;//adds members of g2 and g3 to each other
+	cout << g2 + g3 << endl;//adds members of g2 and g3 to each other
 	/*g3 += g3 += g3 += g3;*/
 	
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
@@ -206,4 +206,3 @@ int main()
 	cout<<*find(persons,persons+10,Erfan);
 	*/
 }
-
