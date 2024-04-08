@@ -46,6 +46,17 @@ public:
 		this->members = new person[max_lenght];
 		this->size = 0;
 	}
+	Group(Group& g) {
+		this->cap =g.cap;
+		this->members = new person[g.cap];
+		this->size = 0;
+
+		for (int i = 0; i < g.size; i++) {
+			this->members[i].name = g.members[i].name;
+			this->members[i].age = g.members[i].age;
+			this->size++;
+		}
+	}
 	void add(person p) {
 		if (this->size == this->cap) {
 			return;
@@ -70,6 +81,7 @@ public:
 		delete[] members;
 	}
 	friend bool isGroupFull(Group g);
+	friend ostream& operator<<(ostream& out, Group g);
 
 private:
 	int size;
@@ -77,6 +89,13 @@ private:
 	person* members;
 
 };
+
+ostream& operator<<(ostream& out, Group g) {
+	for (int i = 0; i < g.size; i++) {
+		out << g.members[i].getname() << " \t";
+	}
+	return out;
+}
 
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
@@ -94,7 +113,7 @@ int main()
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;
+	//cout<<isGroupFull(g1)<<endl;
 	
 	
 	Group g2(g1);
