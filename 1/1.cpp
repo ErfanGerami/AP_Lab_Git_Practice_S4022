@@ -21,6 +21,15 @@ public:
 		this->age = a.age;
 		this->name = a.name;
 	}
+	bool operator<(Person b) {
+		return name < b.name;
+	}
+	bool operator>(Person b) {
+		return name > b.name;
+	}
+	bool operator==(Person b) {
+		return (name == b.name)&&(age==b.age);
+	}
 private:
 	string name;
 	int age;
@@ -126,7 +135,34 @@ ostream& operator<<(ostream& out, const Group& g) {
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
 }
+string to_string(int num) {
 
+	int len = log10(num) + 1;
+	string a;
+	if (num == 0) {
+		a += '0';
+		return a;
+	}
+	int count = len-1,l_num=0;
+	for (int i = 0; i < len; i++) {
+		l_num = num / pow(10, count);
+		a += l_num+'0';
+		num -= pow(10, count) * l_num;
+		count--;
+		
+	}
+	return a;
+}
+int* find(Person* start, Person* finish, Person to_be_found) {
+	int count = finish-start;
+	for (int i = 0; i < count; i++) {
+		if (*(start + i) == to_be_found) {
+			return &i;
+		}
+	}
+	count = -1;
+	return &count;
+}
 int main()
 {
 	Person p1("somename");
@@ -150,7 +186,7 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	cout << endl << g3;
-	/*
+	
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -161,10 +197,9 @@ int main()
 
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
-	}*/
-	/*
+	}
 	cout<<*find(persons,persons+10,Erfan);
-	*/
+	
 
 
 
