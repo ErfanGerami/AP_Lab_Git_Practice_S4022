@@ -83,26 +83,41 @@ public:
 		size--;
 	}
 
-
-	Group operator+(const Group &g) const
-{
-    Group return_value(this->cap + g.cap);
-    return_value.size = this->size + g.size;
-    return_value.members = new Person[return_value.cap];
-    int i = 0;
-    for (i = 0; i < this->size; i++)
-    {
-        return_value.members[i] = this->members[i];
-    }
-    for (int j = 0; j < g.size; j++, i++)
-    {
-        return_value.members[i] = g.members[j];
-    }
-    return return_value;  // g = g1 + g2
-}
-
-	Group operator+=(Group &g)
+	Group operator=(const Group &g) 
 	{
+		this->size = g.size;
+		this->cap = g.cap;
+		delete[] this->members;
+		this->members = new Person[this->cap];
+
+		for (int i = 0; i < g.size; i++)
+		{
+			this->members[i] = g.members[i];
+		}
+
+		return *this;
+	}
+
+	Group operator+(const Group &g) const//			--> 		//why do i use const key words?
+	{															//when the + operator ends, the 
+		Group return_value(this->cap + g.cap);					//allocated memory for members of
+		return_value.size = this->size + g.size;				//return_value will be free. so...
+		return_value.members = new Person[return_value.cap];
+		int i = 0;
+		for (i = 0; i < this->size; i++)
+		{
+			return_value.members[i] = this->members[i];
+		}
+		for (int j = 0; j < g.size; j++, i++)
+		{
+			return_value.members[i] = g.members[j];
+		}
+		return return_value; 
+	}
+
+	Group operator+=(const Group &g)
+	{
+
 		Group return_value(this->cap + g.cap);
 		return_value.size = this->size + g.size;
 
@@ -125,8 +140,7 @@ public:
 		{
 			this->members[i] = return_value.members[i];
 		}
-
-		return return_value;
+		return *this;
 	}
 
 	friend bool isGroupFull(Group g);
@@ -164,7 +178,7 @@ int main()
 	Person p1("somename");
 	Person p2("somename2");
 	cout << p1 << p2;
-	*/
+	
 	
 	Group g1(5);
 	g1.add({ "Erfan",20 });
@@ -182,15 +196,15 @@ int main()
 	cout << g2 << endl;
 	
 	
-	/*g3 = g1;
-	cout << g3;*/
-	cout << g2 + g3 << endl;//adds members of g2 and g3 to each other
-	/*g3 += g3 += g3 += g3;*/
+	g3 = g1;
+	cout << g3 <<endl;
+	g3 = g2 + g3;//adds members of g2 and g3 to each other
+	g3 += g3 += g3 += g3;
 	
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	cout << g3 <<endl;//should cout every person in it with a \t as the separator
-	/*
+	*//*
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
