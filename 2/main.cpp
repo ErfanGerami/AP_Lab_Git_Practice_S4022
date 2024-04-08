@@ -18,7 +18,6 @@ int main()
 
 	Score s1(1, "do better next time", Score::BAD);
 	Score scores[10];//we have default constructor so we should be fine right?:)
-
 	FOR(10) {
 		SETSCORE(i)
 		//why = betwean two scores raises an error?:)
@@ -27,6 +26,5 @@ int main()
 		print(scores[i]);
 	}
 	Score::setID_generator(Score::ID_generator+100);//just a setter for ID_generator
-
 }
 
