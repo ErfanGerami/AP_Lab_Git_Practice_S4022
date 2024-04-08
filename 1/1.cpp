@@ -23,8 +23,15 @@ public:
 		this->age = age;
 	}
 
-	string& getName() { return name; }
-	const string& getName() const{ return name; }
+	string& getName() 
+	{ 
+		return name; 
+	}
+	const string& getName() const
+	{ 
+		return name; 
+	}
+
 
 	friend ostream& operator<<(ostream& out, const Person& p);
 private:
@@ -172,6 +179,33 @@ ostream& operator<<(ostream& out, const Group& p)
 	return out;
 }
 
+void sort(Person *_start_ , Person *_end_)
+{
+	int flag = 0;
+	Person * iterator = _start_;
+	Person * tmp = new Person;
+	while(flag == 0)
+	{
+		flag = 1;
+		iterator = _start_;
+		while(iterator != _end_ - 1)
+		{
+			if (iterator->getName().compare((iterator + 1)->getName()) > 0)
+			{
+				flag = 0;
+				*tmp = *iterator;
+				*iterator = *(iterator + 1);
+				*(iterator + 1) = *tmp;
+			}
+			iterator += 1;
+		}
+	}
+	//to prevent the destructor to free dangoures zone!
+	iterator = new Person[1];
+	tmp = new Person[1];
+	//if this varables point to a good datas, at the end of this function the destructor will destroy those (smart work!)
+}
+
 int main()
 {
 	/*
@@ -204,19 +238,21 @@ int main()
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	cout << g3 <<endl;//should cout every person in it with a \t as the separator
-	*//*
+	*/
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
-	for(int i=0;i<10;i++){
+	for(int i=0;i<10;i++)
+	{
 		persons[i].getName()=to_string(rand()%100);
 	}
+
 	sort(persons,persons+10);//what operator should be overloaded for sort? :)
 
-	for(int i=0;i<10;i++){
+	for(int i=0;i<10;i++)
+	{
 		cout<<persons[i].getName()<<' ';
 	}
 	
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	//cout<<*find(persons,persons+10,Erfan);
 }
