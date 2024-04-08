@@ -8,6 +8,11 @@ class Person {
 public:
 	friend class Group;
 	Person(){};
+	Person(Person &P)
+	{
+		this->name = P.name;
+		this->age = P.age;
+	}
 	Person(const string& name) 
 	{
 		this->name = name;
@@ -17,8 +22,6 @@ public:
 		this->name = name;
 		this->age = age;
 	}
-
-	//int
 
 	string& getName() { return name; }
 	const string& getName() const{ return name; }
@@ -38,6 +41,17 @@ ostream& operator<<(ostream& out, const Person& p)
 class Group {
 public:
 	friend class Person;
+	Group(){};
+	Group(Group &G)
+	{
+		this->cap = G.cap;
+		this->members = new Person[this->cap];
+		this->size = G.size;
+		for (int i = 0; i < this->size; i++)
+		{
+			this->members[i] = G.members[i];
+		}
+	}
 	Group(int max_lenght)  
 	{
 		this->cap = max_lenght;
@@ -69,11 +83,12 @@ public:
 		size--;
 	}
 
-	Group operator+(Group g)
+
+	Group operator+(Group &g)
 	{
 		Group return_value(this->cap + g.cap);
 		return_value.size = this->size + g.size;
-
+		return_value.members = new Person[return_value.cap];
 		int i = 0;
 		for (i; i < this->size; i++)
 		{
@@ -83,10 +98,10 @@ public:
 		{
 			return_value.members[i] = g.members[j];
 		}
-		return return_value;
+		return return_value;  //g = g1 + g2
 	}
 
-	Group operator+=(Group g)
+	Group operator+=(Group &g)
 	{
 		Group return_value(this->cap + g.cap);
 		return_value.size = this->size + g.size;
@@ -166,12 +181,15 @@ int main()
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	
-	/*
-	g3 = g1;
-	cout << g3;
-	g3 =  g2 + g3;//adds members of g2 and g3 to each other
-	g3 += g3 += g3 += g3;
 	
+	/*g3 = g1;
+	cout << g3;*/
+	g3 = g2 + g3;//adds members of g2 and g3 to each other
+	/*g3 += g3 += g3 += g3;*/
+	
+	cout << g1 <<endl;//should cout every person in it with a \t as the separator
+	cout << g2 << endl;
+	cout << g3 <<endl;//should cout every person in it with a \t as the separator
 	/*
 	Person persons[10];
 	Person Erfan("Erfan",20);
