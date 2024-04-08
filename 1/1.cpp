@@ -185,10 +185,10 @@ ostream& operator<<(ostream& out, const Group& p)
 	for (int i = 0; i < p.size; i++)
 	{
 		out << i+1 << "." << p.members[i].getName();
-		out << " ";
-		out << " ";
-		out << " ";
-		out << " ";
+		out << " "; //you may ask what the hell did you do?!
+		out << " "; //i will answer : i had no idea too!
+		out << " "; //the ostream played a game with me and printed \t character
+		out << " "; //("    " had same problem!) so i seperated every " " :D
 	}
 	out << "\n";
 	return out;
