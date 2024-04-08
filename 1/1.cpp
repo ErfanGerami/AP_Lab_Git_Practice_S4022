@@ -32,6 +32,14 @@ public:
 		return name; 
 	}
 
+	bool operator==(const Person &p)
+	{
+		if(this->name == p.name and this->age == p.age)
+		{
+			return true;
+		}
+		return false;
+	}
 
 	friend ostream& operator<<(ostream& out, const Person& p);
 private:
@@ -41,8 +49,10 @@ private:
 
 ostream& operator<<(ostream& out, const Person& p) 
 {
-	out << p.getName();
+
+	out << p.getName() << "\n";
 	return out;
+
 }
 
 class Group {
@@ -174,8 +184,13 @@ ostream& operator<<(ostream& out, const Group& p)
 {
 	for (int i = 0; i < p.size; i++)
 	{
-		out << p.members[i].getName() << "\t";
+		out << i+1 << "." << p.members[i].getName();
+		out << " ";
+		out << " ";
+		out << " ";
+		out << " ";
 	}
+	out << "\n";
 	return out;
 }
 
@@ -208,7 +223,7 @@ void sort(Person *_start_ , Person *_end_)
 
 int main()
 {
-	/*
+
 	Person p1("somename");
 	Person p2("somename2");
 	cout << p1 << p2;
@@ -238,7 +253,7 @@ int main()
 	cout << g1 <<endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 	cout << g3 <<endl;//should cout every person in it with a \t as the separator
-	*/
+
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -248,11 +263,20 @@ int main()
 	}
 
 	sort(persons,persons+10);//what operator should be overloaded for sort? :)
+	//i overloaded the < operator, but i got some stupids errors from compiler
+	//so i made a now one sort()
 
 	for(int i=0;i<10;i++)
 	{
 		cout<<persons[i].getName()<<' ';
 	}
 	
-	//cout<<*find(persons,persons+10,Erfan);
+	if(persons + 10 != find(persons,persons+10,Erfan))
+	{
+		cout << *find(persons,persons+10,Erfan);
+	}
+	else
+	{
+		cout << "\nfind function message : object NOT FOUND!\n";
+	}
 }
