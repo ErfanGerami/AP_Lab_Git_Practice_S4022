@@ -11,8 +11,9 @@ public:
 	
 	Person(const string& name) {
 		this->name = name;
-
+		age = 0;
 	}
+	
 
 	Person(string _name, int _age)
 	{
@@ -24,8 +25,16 @@ public:
 		name = " ";
 		age = 0;
 	}
+
 	string getName() const {return name;}
 	string& getName()  { return name; }
+	void setName(const string& _name) {name = _name;}
+	void setAge(int _age) {age = _age;}
+
+    bool operator<(const Person& person) const {
+        return name < person.name;
+    }
+
 	friend class Group;
 
 private:
@@ -44,13 +53,7 @@ ostream& operator<<(ostream& out, const Person& p) {
 
 class Group {
 public:
-/* 	Group()
-	{
-		size = 0;
-		cap = 0;
-		members = new Person[MAX_SIZE];
-	} */
-\
+
 	Group(int max_lenght)  {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
@@ -65,6 +68,16 @@ public:
             this->members[i] = other.members[i];
         }
     }
+	Group(Group& g)
+	{
+		this->size = g.size;
+		this->cap = g.cap;
+		this->members = new Person[g.cap];
+		for(int i = 0;i < g.size;++i)
+		{
+			this->members[i] = g.members[i];
+		}
+	}
 	Group& operator=(const Group& other) {
         if (this != &other) {
             delete[] members;
@@ -78,59 +91,55 @@ public:
         }
         return *this;
     }
-	void add(Person p) {
-		if (this->size == this->cap) {
-			return;
-		}
-		this->members[size] = p;
-		this->size++;
-	}
+	void add(const Person& p) {
+        if (size == cap) {
+            return;
+        }
+        members[size] = p;
+        size++;
+    }
+    void deletePerson(const string& name) {
+        int i;
+        for (i = 0; i < size; i++) {
+            if (members[i].getName() == name)
+                break;
+        }
+        if (i == size) {
+            return;
+        }
+        for (int index = i; index < size - 1; index++) {
+            members[index] = members[index + 1];
+        }
+        members[size - 1].setName("");
+        size--;
+    }
+	Group operator+(const Group& g) const {
+        Group res(size + g.size);
+        for (int i = 0; i < size; ++i) {
+            res.members[i] = members[i];
+        }
+        for (int i = size, j = 0; i < size + g.size; ++i, ++j) {
+            res.members[i] = g.members[j];
+        }
+        res.size = size + g.size;
+        res.cap = size + g.size;
+        return res;
+    }
+	Group& operator+=(const Group& g) {
+        cap = size + g.size;
+        for (int i = size, j = 0; i < size + g.size; ++i, ++j) {
+            members[i] = g.members[j];
+            size++;
+        }
+        return *this;
+    }
 
-	void deletePerson(string name) {
-		int i;
-		for (i = 0; i < size; i++) {
-			if (members[i].name == name)
-				break;
-		}
-		if (i == size) {
-			return;
-		}
-		for (int index = i; index < size - 1; index++) {
-			members[index] = members[index + 1];
-		}
-		members[size - 1].getName() = "";
-		size--;
-	}
-	Group operator+(Group g)
-	{
-		Group res(this->size + g.size);
-		for(int i = 0;i < (this->size);++i)
-		{
-			res.members[i] = this->members[i];
-		}
-		for(int i = this->size, j = 0;i < (this->size + g.size);++i, ++j)
-		{
-			res.members[i] = g.members[j];
-		}
-		res.size = this->size + g.size;
-		res.cap = this->size + g.size;
-		return res;
-	}
-	Group operator+= (Group g)///////////cap
-	{
-		for(int i = this->size, j = 0;i < (this->size + g.size);++i, ++j)
-		{
-			this->members[i] = g.members[j];
-			this->size++;
-		}
-		return *this;
-	}
 	friend ostream& operator<< (ostream& out, const Group &g);
 
 	~Group() {
 		delete[] members;
 	}
-	friend bool isGroupFull(Group g);
+	friend bool isGroupFull(const Group& g);
 
 private:
 	int size;
@@ -148,8 +157,8 @@ ostream& operator<< (ostream& out, const Group &g)
 	return out;
 }
 
-bool isGroupFull(Group g) {
-	return (g.size == g.cap);
+bool isGroupFull(const Group& g) {
+    return (g.size == g.cap);
 }
 
 int main()
@@ -179,7 +188,7 @@ int main()
 	g3 += g3 += g3 += g3;
 
 	
-	/*
+	
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -190,18 +199,26 @@ int main()
 
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
-	}*/
+	}
 	/*
 	cout<<*find(persons,persons+10,Erfan);
 	*/
 	
-
-
-
-
-
-
-
-
 }
 
+/* 	void sort(Person persons[10],Person EO_persons[10])
+	{
+		string tmp;
+		for(int i = 0;i < 10;++i)
+		{
+			for(int j = i+1;j < 10;++j)
+			{
+				if(persons[i].name > persons[j].name)
+				{
+					tmp = persons[i].name;
+					persons[i].name = persons[j].name;
+					persons[j].name = tmp;
+				}
+			}
+		}
+	} */
