@@ -43,6 +43,14 @@ public:
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
+	Group(const Group& g) {
+		this->cap = g.cap;
+		this->size = g.size;
+		this->members = new Person[cap];
+		for (int i = 0; i < size; i++) {
+			this->members[i] = g.members[i];
+		}
+	}
 	void add(Person p) {
 		if (this->size == this->cap) {
 			return;
