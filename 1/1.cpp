@@ -71,6 +71,17 @@ public:
 		this->size = other.size;
 	}
 
+	Group& operator=(const Group& other)  {
+		this->cap = other.cap;
+		this->members = new Person[other.size];
+		for (size_t i = 0; i < other.size; i++)
+		{
+			this->members[i] = other.members[i];
+		}
+		this->size = other.size;
+		return *this;
+	}
+
 	void add(Person p) {
 		if (this->size == this->cap) {
 			return;
@@ -121,11 +132,12 @@ public:
 			result.members[i] = this->members[i];
 		}
 
-		for (size_t j = i; j < this->size; j++)
+		for (size_t j = 0; j < other.size; j++)
 		{
-			result.members[j] = this->members[j-i];
+			result.members[j+i] = other.members[j];
 		}
-		
+
+		result.size = this->size + other.size;		
 		return result;
 	}
 
@@ -134,6 +146,7 @@ public:
 
 		this->size += other.size;
 		this->cap += other.cap;
+
 		Person* oldMembers = new Person[oldMembersCount];
 
 		for (size_t j = 0; j < oldMembersCount; j++)
@@ -143,14 +156,14 @@ public:
 		
 		delete [] this->members;
 
-		this->members = new Person[this->size];
+		this->members = new Person[this->cap];
 		
 		for (size_t i = 0; i < oldMembersCount; i++)
 		{
 			this->members[i] = oldMembers[i];
 		}
 		
-		for (size_t j = oldMembersCount; j < this->size; j++)
+		for (size_t j = oldMembersCount; j < other.size; j++)
 		{
 			this->members[j] = other.members[j-oldMembersCount];
 		}
@@ -203,7 +216,7 @@ int main()
 	
 	g3 = g1;
 	cout << g3;
-	g3 =  g2 + g3;//adds members of g2 and g3 to each other
+	g3 =  g2 + g3; //adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	
 	
