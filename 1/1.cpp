@@ -220,22 +220,22 @@ int main()
 	g3 += g3 += g3 += g3;
 	
 	
-	// Person persons[10];
-	// Person Erfan("Erfan",20);
-	// persons[1]=Erfan;
-	// for(int i=0;i<10;i++){
-	// 	persons[i].getName()=to_string(rand()%100);
-	// }
-	// sort(persons,persons+10); //what operator should be overloaded for sort? :)
+	Person persons[10];
+	Person Erfan("Erfan",20);
+	for(int i=0;i<10;i++){
+		persons[i].getName() = to_string(rand()%100);
+	}
+	sort(persons,persons+10); //what operator should be overloaded for sort? :)
 
-	// for(int i=0;i<10;i++){
-	// 	cout<<persons[i].getName()<<' ';
-	// }
+	for(int i=0;i<10;i++){
+		cout<<persons[i].getName()<<' ';
+	}
+	persons[1]=Erfan;
 
-	
-	// cout<<*find(persons,persons+10,Erfan);
-	
+	try{
+		cout<<*find(persons,persons+10,Erfan);
+	}catch(exception e){
 
-
+	}
 }
 
