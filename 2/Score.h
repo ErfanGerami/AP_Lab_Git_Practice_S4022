@@ -1,3 +1,5 @@
+#ifndef Score_h
+#define Score_h
 #include <iostream>
 #include <string>
 using namespace std;
@@ -17,9 +19,10 @@ public:
 	Score(int score, const char* detail, Label label);
 	Score();
 
-	Score operator=(Score &s);
+	Score operator=(Score s);
 
-	static int setID_generator(int number);
+	static void setID_generator(int number);
+	
 	
 private:
 	int score;
@@ -29,5 +32,4 @@ private:
 	static int ID_generator;
 };
 
-
-
+#endif

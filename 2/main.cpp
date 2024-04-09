@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,7 +6,7 @@
 #include "SomeRandomDotHFile.h"
 using namespace std;
 #define FOR(n) for(int i=0;i<n;i++)
-#define SETSCORE(i) int score=rand()%20+1; scores[i] = Score( score,("some string " + to_string(i)).c_str(), Score::Label(3-score/5)) ;
+#define SETSCORE(i) int score=rand()%20+1; scores[i] = Score( score,("some string " + to_string(i)).c_str(), Score::Label(4-score/5)) ;
 
 
 int main()
@@ -20,13 +19,12 @@ int main()
 
 	FOR(10) 
 	{
-		int score=rand()%20+1;
-		scores[i] = Score(score,("some string " + to_string(i)).c_str(), Score::Label(3-score/5)) ;
+		SETSCORE(i);
 		//why = between two scores raises an error?:)
 	}
 	FOR(10) {
 		print(scores[i]);
 	}
-	Score::setID_generator(Score::ID_generator+100);//just a setter for ID_generator
+	Score::setID_generator(Score::ID_generator + 100);//just a setter for ID_generator
 }
 
