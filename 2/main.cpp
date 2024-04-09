@@ -9,8 +9,7 @@ using namespace std;
 #define FOR(n) for(int i=0;i<n;i++)
 #define SETSCORE(i) int score=rand()%20+1;/*no 0s*/\
 scores[i] = Score( score,("some string " + to_string(i)).c_str(),Score::Label(3-score/5)) ;
-
-
+int Score::ID_generator=0;
 int main()
 {
 	
@@ -20,7 +19,9 @@ int main()
 	Score scores[10];//we have default constructor so we should be fine right?:)
 
 	FOR(10) {
-		SETSCORE(i)
+		//SETSCORE(i)
+		int score = rand() % 20 + 1;/*no 0s*/\
+			scores[i] = Score(score, ("some string " + to_string(i)).c_str(), Score::Label(3 - score / 5));
 		//why = betwean two scores raises an error?:)
 	}
 	FOR(10) {
