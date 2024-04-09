@@ -4,15 +4,23 @@ using namespace std;
 class Score {
 public:
 	friend void print(const Score& score);
+	friend int main();
 	
-	typedef enum {
+	typedef enum 
+	{
 		GREAT,
 		GOOD,
 		NOTBAD,
 		BAD,
 	}Label;
 
-	Score(int score,  char* detail, Label label);
+	Score(int score, const char* detail, Label label);
+	Score();
+
+	Score operator=(Score &s);
+
+	static int setID_generator(int number);
+	
 private:
 	int score;
 	Label label;

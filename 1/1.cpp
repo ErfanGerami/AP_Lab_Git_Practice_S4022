@@ -250,10 +250,6 @@ int main()
 	g3 = g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	
-	cout << g1 <<endl;//should cout every person in it with a \t as the separator
-	cout << g2 << endl;
-	cout << g3 <<endl;//should cout every person in it with a \t as the separator
-
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
