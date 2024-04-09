@@ -17,6 +17,8 @@ public:
 	Score(int score,  char* detail, Label label);
 	Score(int score,const char* detail, Label label);
 	Score& operator=(Score& cop);
+    static void setID_generator(int num);
+	friend int main();
 private:
 	int score;
 	Label label;
