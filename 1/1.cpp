@@ -18,23 +18,14 @@ public:
 	}
 	string& getName()  { return name; }
 	string getName()const { return name; } //me
+	int getAge()const { return age; } //me
 	bool operator < (const Person& other) const{ //me
 		return this->name < other.name;
 	}
 	bool operator ==(const Person& other) const { //me
 		return  this->name == other.name && this->age == other.age;
 	}
-	Person* find(Person* start, Person* end,const Person &goal){ //me
-		cout << "here";
-		for (Person* i = start; i < end; ++i) {
-			if (*i == goal) {
-				cout << "Hey";
-				return i;
-			}
-		}
-		cout << "can not find\n";
-		return end ;
-	}
+	
 	friend class Group;
 private:
 	string name;
@@ -42,9 +33,30 @@ private:
 
 };
 
+
+
+ostream& operator<< (ostream& out, const Person* p) {
+	if (p == NULL) {
+		cout << "can not find\n";
+		return out;
+	}
+	cout << p->getName();
+	return out;
+}
 ostream& operator<<(ostream& out, const Person& p) { //check
 	cout << p.getName();
 	return out;
+}
+Person* find(Person* start, Person* end, const Person& goal) { //me
+	cout << "here";
+	for (Person* i = start; i <= end; ++i) {
+		if (i->getName() == goal.getName() && i->getAge() == goal.getAge()) {
+			cout << "Hey";
+			return i;
+		}
+	}
+	cout << "can not find\n";
+	return end;
 }
 
 
@@ -185,23 +197,19 @@ int main()
 
 		persons[i].getName()=to_string(rand()%100);
 	}
-	sort(persons,persons+10);//what operator should be overloaded for sort? :)
+	sort(persons, persons + 10);//what operator should be overloaded for sort? :)
 
 	for (int i = 0;i<10;i++) {
 		cout<<persons[i].getName()<<' ';
 	}
 	
+	if (find(persons, persons + 10, Erfan) == persons + 10)
+	{
+		return 0;
+	}
+	else 
+	cout << *find(persons, persons + 10, Erfan);
 	
-	find(persons,persons+10,Erfan);
-	
-	
-
-
-
-
-
-
-
 
 }
 
