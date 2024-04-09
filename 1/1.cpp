@@ -35,19 +35,19 @@ private:
 
 
 
-ostream& operator<< (ostream& out, const Person* p) {
+/*ostream& operator<< (ostream& out, const Person* p) {
 	if (p == NULL) {
 		cout << "can not find\n";
 		return out;
 	}
 	cout << p->getName();
 	return out;
-}
+}*/
 ostream& operator<<(ostream& out, const Person& p) { //check
 	cout << p.getName();
 	return out;
 }
-Person* find(Person* start, Person* end, const Person& goal) { //me
+/*Person* find(Person* start, Person* end, const Person& goal) { //me
 	cout << "here";
 	for (Person* i = start; i <= end; ++i) {
 		if (i->getName() == goal.getName() && i->getAge() == goal.getAge()) {
@@ -57,7 +57,7 @@ Person* find(Person* start, Person* end, const Person& goal) { //me
 	}
 	cout << "can not find\n";
 	return end;
-}
+}*/
 
 
 
@@ -210,6 +210,5 @@ int main()
 	else 
 	cout << *find(persons, persons + 10, Erfan);
 	
-
 }
 
