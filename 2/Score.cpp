@@ -2,7 +2,7 @@
 
 int Score::ID_generator = 0;
 
-Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
+Score::Score(int score,const char* detail, Label label) :ID(Score::ID_generator) {
 	this->score = score;
 	this->label = label;
 	this->detail = detail;
@@ -41,7 +41,7 @@ void print(const Score& score)
 }
 void Score::set_score(int _score){score = _score;}
 void Score::set_label(Label _label){label = _label;}
-void Score::set_detail(string _detail){detail = _detail;}
+void Score::set_detail(const string& _detail){detail = _detail;}
 void Score::setID_generator(int id_g){ID_generator = id_g;}
 Score::~Score(){}  
 
