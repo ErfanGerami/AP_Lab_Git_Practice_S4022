@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -5,6 +6,7 @@ using namespace std;
 
 class Person {
 public:
+
 	Person(const string& _name, int const _age)
 	{
 		name = _name;
@@ -85,13 +87,56 @@ public:
 		size--;
 	}
 	friend bool isGroupFull(Group g);
-	Group operator + (Group const G)
+	Group& operator = (const Group& g)
 	{
-
+		int i;
+		this->cap = g.cap;
+		this->size = g.size;
+		this->members = new Person[g.cap];
+		for (i = 0; i < size;i++)
+		{
+			members[i] = g.members[i];
+		}
+		return *this;
+	}
+	Group operator + (Group const g)
+	{
+		int i;
+		Group result(cap+g.cap);
+		result.size = size + g.size;
+		for (i = 0;i < size;i++)
+		{
+			result.members[i] = members[i];
+		}
+		for (i = size;i < size + g.size;i++)
+		{
+			result.members[i] = g.members[i - size];
+		}
+		return result;
 	}
 	~Group() {
 		delete[] members;
 	}
+	Group& operator += (const Group& g)
+	{
+		int i;
+		Person* tmp;
+		tmp = new Person[g.cap + cap];
+
+		for (i = 0;i < size;i++)
+		{
+			tmp[i] = members[i];
+		}
+		for (i = 0;i < g.size;i++)
+		{
+			tmp[i+size] = g.members[i];
+		}
+		this->members = tmp;
+		cap += g.cap;
+		size += g.size;
+		return *this;
+	}
+
 
 private:
 	int size;
@@ -136,12 +181,16 @@ int main()
 	
 	
 	g3 = g1;
-	cout << g3;
-	g3 =  g2 + g3;//adds members of g2 and g3 to each other
-	g3 += g3 += g3 += g3;
+	cout << g3 << endl;
+	//g3 =  g2 + g3;//adds members of g2 and g3 to each other
+	cout << g3 << endl;
+	//g3 += g3 += g3 += g3;
+	g3 += g2;
+	cout << g3<<endl;
+	cout << g1;
 	
 
-	Person persons[10];
+	/*Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
 	for(int i=0;i<10;i++){
