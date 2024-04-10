@@ -6,7 +6,8 @@ using namespace std;
 class Person {
 public:
 	
-	Person()
+
+    Person()
 	{
        name=" ";
 	   age=0;
@@ -17,19 +18,22 @@ public:
 		name=_name;
 		age=_age;
 	}
+
 	Person(const string& name) {
 		this->name = name;
 
 	}
-
-	//Person(const Person &p);
-	string& getName() { return name; }
-    string getName() const {return name;}
-	int get_age()   {return age;}
-	friend class Group;
-     bool operator<(const Person& other) const {
-         return name < other.name;
-     }
+	string& getName()  { return name; }
+     string getName() const {return name;}
+     int get_age()   {return age;}
+	   bool operator<(const Person& other) const;
+	   bool operator == (Person const &obj);
+    //    bool operator != (Person const &obj);
+    //    bool operator < (Person const &obj);
+    //    bool operator > (Person const &obj);
+    //    bool operator <= (Person const &obj);
+    //    bool operator >= (Person const &obj); 
+     friend class Group;
 private:
 	string name;
 	int age;
@@ -41,6 +45,10 @@ ostream& operator<<(ostream& out, const Person& p) {
 	return out;
 }
 
+bool Person ::operator<(const Person& other) const
+{
+         return name < other.name;
+}
 
 
 class Group {
@@ -56,37 +64,17 @@ public:
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
-
-	// Group(const Group &p)
-	// {
-	// 	size=p.size;
-	// 	cap=p.cap;
-	// 	for(int i=0 ; i< size ; i++)
-	// 	{
-	// 		members[i].name=p.members[i].name;
-	// 		members[i].age=p.members[i].age;
-	// 	}
-	// }
-
-   // oprators part
-   Group & operator=(Group const &obj);
-   Group & operator +=(Group const &obj);
-   Group & operator+(Group const &obj);
-
-
-
-	 void add(const Person& newGuest) {
-        if (this->size == this->cap) {
+	void add(Person p) {
+		if (this->size == this->cap) {
 			return;
 		}
-		this->members[size] = newGuest;
+		this->members[size] = p;
 		this->size++;
-    }
-  
+	}
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name ==name)
+			if(members[i].name == name)
 				break;
 			
 		}
@@ -96,62 +84,32 @@ public:
 		size--;
 	}
 
-	void set_size(int _size)
-	{
-        size=_size;
-	}
 
-	void set_cap(int _cap)
-	{
-		   cap=_cap;
-	}
-    
-	int get_size()
-	{
-		return size;
-	}
-
-	int get_cap()
-	{
-		return cap;
-	}
+     Group & operator=(Group const &obj);
+    Group & operator +=(Group const &obj);
+    Group & operator+(Group const &obj);
+      friend istream& operator>>(istream& in,Group& obj);
+    friend ostream& operator<<(ostream& out, const Group& obj);
+     
 	// ~Group() {
 	// 	delete[] members;
 	// }
+	// ~Group() {
+	// 	delete[] members;
+	// }
+    friend bool isGroupFull(Group g);
 
-    friend istream& operator>>(istream& in,Group& obj);
-    friend ostream& operator<<(ostream& out, const Group& obj);
-
-    private:
+private:
 	int size;
 	int cap;
 	Person* members;
 
 };
 
-
-
-istream& operator>>(istream& in, Group& obj)
-{
-       cout << "Enter size: ";
-       in >> obj.size;
-       return in;
-}
-
-ostream& operator<<(ostream& out, const Group& obj)
-{
-	for(int i=0 ; i<obj.size ; i++)
-	{
-		out<<obj.members[i].getName()<<" "<<obj.members[i].get_age()<<endl;
-	}
-	return out;
-    
-}
-
-
 bool isGroupFull(Group g) {
-	return (g.get_size() == g.get_cap());
+	return (g.size == g.cap);
 }
+
 
 Group& Group::operator=(const Group& obj)
 {
@@ -202,9 +160,139 @@ Group & Group::operator+(Group const &obj)
 }
 
 
+istream& operator>>(istream& in, Group& obj)
+{
+       cout << "Enter size: ";
+       in >> obj.size;
+       return in;
+}
+
+ostream& operator<<(ostream& out, const Group& obj)
+{
+	for(int i=0 ; i<obj.size ; i++)
+	{
+		out<<obj.members[i].getName()<<" "<<obj.members[i].get_age()<<endl;
+	}
+	return out;
+    
+}
+
+
+
+bool Person::operator==( Person const &obj)
+{
+       return name == obj.name;
+}
+
+// bool Complex ::operator!=(Complex const &obj)
+// {
+//       float z,t;
+//       float z2,t2;
+      
+//       t=real*real + image*image;
+//       z=sqrt(t);
+//       t2=obj.real*obj.real + obj.image*obj.image;
+//       z2=sqrt(t2);
+      
+//      if(z!=z2)
+//      {
+//          return true;
+//      }
+
+//      else
+//      {
+//         return false;
+//      }
+// }
+
+// bool Complex ::operator < (Complex const &obj)
+// {
+//       float z,t;
+//       float z2,t2;
+      
+//       t=real*real + image*image;
+//       z=sqrt(t);
+//       t2=obj.real*obj.real + obj.image*obj.image;
+//       z2=sqrt(t2);
+      
+//      if(z2 < z)
+//      {
+//          return true;
+//      }
+
+//      else
+//      {
+//         return false;
+//      }
+// }
+
+// bool Complex ::operator > (Complex const &obj)
+// {
+//       float z,t;
+//       float z2,t2;
+      
+//       t=real*real + image*image;
+//       z=sqrt(t);
+//       t2=obj.real*obj.real + obj.image*obj.image;
+//       z2=sqrt(t2);
+      
+//      if(z2 > z)
+//      {
+//          return true;
+//      }
+
+//      else
+//      {
+//         return false;
+//      }
+// }
+
+// bool Complex ::operator <= (Complex const &obj)
+// {
+//       float z,t;
+//       float z2,t2;
+      
+//       t=real*real + image*image;
+//       z=sqrt(t);
+//       t2=obj.real*obj.real + obj.image*obj.image;
+//       z2=sqrt(t2);
+      
+//      if(z2 <= z)
+//      {
+//          return true;
+//      }
+
+//      else
+//      {
+//         return false;
+//      }
+// }
+
+// bool Complex ::operator >= (Complex const &obj)
+// {
+//       float z,t;
+//       float z2,t2;
+      
+//       t=real*real + image*image;
+//       z=sqrt(t);
+//       t2=obj.real*obj.real + obj.image*obj.image;
+//       z2=sqrt(t2);
+      
+//      if(z2 >= z)
+//      {
+//          return true;
+//      }
+
+//      else
+//      {
+//         return false;
+//      }
+// }
+
+
+
 int main()
 {
-	
 	Person p1("somename");
 	Person p2("somename2");
 	cout << p1<<endl<<p2;
@@ -248,10 +336,11 @@ int main()
 	}
 
 	 
-     
 	  if(find(persons,persons+10,Erfan)!=persons+10)
 	     cout<<*find(persons,persons+10,Erfan);
 
    return 0;
+
+
 }
 
