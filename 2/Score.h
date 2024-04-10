@@ -14,12 +14,11 @@ public:
 	}Label;
 
     Score();
-	Score(int score,  char* detail, Label label);
-	static void setID_generator(int x)
-	{
-
-	}
-    
+    Score(int score,  char* detail, Label label);
+	Score(int score,  const char* detail, Label label);
+	Score & operator =(const  Score & obj);
+    ~Score();
+	static void setID_generator(int x);
 	friend int main();
 	
 	
@@ -30,4 +29,5 @@ private:
 	const int ID;
 	static int ID_generator;
 };
+
 
