@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#ifndef SCORE
+#define SCORE
 class Score {
 public:
 	friend void print(const Score& score);
@@ -10,9 +12,16 @@ public:
 		GOOD,
 		NOTBAD,
 		BAD,
-	}Label;
+	}Label; 
 
 	Score(int score,  char* detail, Label label);
+	Score();
+	void set_score(int _score);
+	void set_label(Label _label);
+	void set_detail(string _detail);
+	void setID_generator(int id_g);
+
+	~Score();
 private:
 	int score;
 	Label label;
@@ -21,5 +30,5 @@ private:
 	static int ID_generator;
 };
 
-
+#endif
 
