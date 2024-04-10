@@ -28,11 +28,6 @@ public:
      int get_age()   {return age;}
 	   bool operator<(const Person& other) const;
 	   bool operator == (Person const &obj);
-    //    bool operator != (Person const &obj);
-    //    bool operator < (Person const &obj);
-    //    bool operator > (Person const &obj);
-    //    bool operator <= (Person const &obj);
-    //    bool operator >= (Person const &obj); 
      friend class Group;
 private:
 	string name;
@@ -183,113 +178,6 @@ bool Person::operator==( Person const &obj)
 {
        return name == obj.name;
 }
-
-// bool Complex ::operator!=(Complex const &obj)
-// {
-//       float z,t;
-//       float z2,t2;
-      
-//       t=real*real + image*image;
-//       z=sqrt(t);
-//       t2=obj.real*obj.real + obj.image*obj.image;
-//       z2=sqrt(t2);
-      
-//      if(z!=z2)
-//      {
-//          return true;
-//      }
-
-//      else
-//      {
-//         return false;
-//      }
-// }
-
-// bool Complex ::operator < (Complex const &obj)
-// {
-//       float z,t;
-//       float z2,t2;
-      
-//       t=real*real + image*image;
-//       z=sqrt(t);
-//       t2=obj.real*obj.real + obj.image*obj.image;
-//       z2=sqrt(t2);
-      
-//      if(z2 < z)
-//      {
-//          return true;
-//      }
-
-//      else
-//      {
-//         return false;
-//      }
-// }
-
-// bool Complex ::operator > (Complex const &obj)
-// {
-//       float z,t;
-//       float z2,t2;
-      
-//       t=real*real + image*image;
-//       z=sqrt(t);
-//       t2=obj.real*obj.real + obj.image*obj.image;
-//       z2=sqrt(t2);
-      
-//      if(z2 > z)
-//      {
-//          return true;
-//      }
-
-//      else
-//      {
-//         return false;
-//      }
-// }
-
-// bool Complex ::operator <= (Complex const &obj)
-// {
-//       float z,t;
-//       float z2,t2;
-      
-//       t=real*real + image*image;
-//       z=sqrt(t);
-//       t2=obj.real*obj.real + obj.image*obj.image;
-//       z2=sqrt(t2);
-      
-//      if(z2 <= z)
-//      {
-//          return true;
-//      }
-
-//      else
-//      {
-//         return false;
-//      }
-// }
-
-// bool Complex ::operator >= (Complex const &obj)
-// {
-//       float z,t;
-//       float z2,t2;
-      
-//       t=real*real + image*image;
-//       z=sqrt(t);
-//       t2=obj.real*obj.real + obj.image*obj.image;
-//       z2=sqrt(t2);
-      
-//      if(z2 >= z)
-//      {
-//          return true;
-//      }
-
-//      else
-//      {
-//         return false;
-//      }
-// }
-
-
 
 int main()
 {
