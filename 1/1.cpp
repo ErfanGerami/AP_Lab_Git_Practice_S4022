@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -6,13 +5,15 @@ using namespace std;
 
 class Person {
 public:
-	
+
 	Person(const string& name) {
 		this->name = name;
 
 	}
-	string& getName()  { return name; }
-
+	Person() {}
+	string& getName() { return name; }
+	const string& getName()const { return name; }
+	friend class Group;
 private:
 	string name;
 	int age;
@@ -25,11 +26,10 @@ ostream& operator<<(ostream& out, const Person& p) {
 }
 
 
-
 class Group {
 public:
 
-	Group(int max_lenght)  {
+	Group(int max_lenght) {
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
@@ -44,16 +44,16 @@ public:
 	void deletePerson(string name) {
 		int i;
 		for (i = 0; i < size; i++) {
-			if(members[i].name == name)
+			if (members[i].name == name)
 				break;
-			
+
 		}
 		for (int index = i; index < size - 1; index++) {
 			members[index] = members[index + 1];
 		}
 		size--;
 	}
-
+	friend bool isGroupFull(Group g);
 	~Group() {
 		delete[] members;
 	}
@@ -71,11 +71,12 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	/*
+
 	Person p1("somename");
-	Person p1("somename2");
-	cout << p1<<p2;
-	*/
+	//had to change it from <p1> to <p2> to pervent redefinition
+	Person p2("somename2");
+	cout << p1 << p2;
+
 	/*
 	Group g1(5);
 	g1.add({ "Erfan",20 });
@@ -112,14 +113,7 @@ int main()
 	/*
 	cout<<*find(persons,persons+10,Erfan);
 	*/
-	
-
-
-
-
-
 
 
 
 }
-
