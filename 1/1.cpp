@@ -23,6 +23,9 @@ public:
 	string getName()const { return name; }
 	friend class Group;
 	friend bool operator< (const Person&, const Person&);
+	bool operator== (const Person p) {
+		return this->name == p.name && this->age == p.age;
+	}
 private:
 	string name;
 	int age;
@@ -162,9 +165,9 @@ int main()
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
 	}
-	/*
+	if (find(persons,persons+10,Erfan) == persons +10)	return 0;
 	cout<<*find(persons,persons+10,Erfan);
-	*/
+	
 	
 
 
