@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "Score.h"
 using namespace std;
 #define FOR(n) for(int i=0;i<n;i++)
 #define SETSCORE(i) int score=rand()%20+1;/*no 0s*/\
@@ -21,12 +20,11 @@ public:
 	}Label;
 
     Score();
-	Score(int score,  char* detail, Label label);
-	static void setID_generator(int x)
-	{
-
-	}
-    
+    Score(int score,  char* detail, Label label);
+	Score(int score,  const char* detail, Label label);
+	Score & operator =(const  Score & obj);
+    ~Score();
+	static void setID_generator(int x);
 	friend int main();
 	
 	
@@ -38,12 +36,12 @@ private:
 	static int ID_generator;
 };
 
+int Score::ID_generator=0;
 
 Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 	this->score = score;
 	this->label = label;
 	this->detail = detail;
-
 	ID_generator++;
 
 }
@@ -51,11 +49,36 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 Score::Score():ID(Score::ID_generator)
 {
 	score=0;
+	ID_generator++;
+}
+Score::Score(int score,const char* detail, Label label) :ID(Score::ID_generator) {
+	this->score = score;
+	this->label = label;
+	this->detail = detail;
+	ID_generator++;
+
 }
 
 void print(const Score& score)
 {
-    cout<<"score : "<<score.score<<"Label : "<<score.label<<"Name : "<<score.detail<<"ID : "<<score.ID<<"ID_generator : "<<score.ID_generator<<endl;
+    cout<<"score :"<<score.score<<" Label :"<<score.label<<" Name :"<<score.detail<<" ID :"<<score.ID<<" ID_generator :"<<score.ID_generator<<endl;
+}
+
+void  Score:: setID_generator(int x)
+{
+	ID_generator=x;
+}
+
+Score& Score::operator=(const Score& obj) {
+    score = obj.score;
+    label = obj.label;
+    detail = obj.detail;
+    return *this;
+}
+
+Score ::~Score()
+{
+   ID_generator --;
 }
 
 int main()
@@ -65,7 +88,6 @@ int main()
 
 	Score s1(1, "do better next time", Score::BAD);
 	Score scores[10];//we have default constructor so we should be fine right?:)
-
 	FOR(10) {
 		SETSCORE(i)
 		//why = betwean two scores raises an error?:)
