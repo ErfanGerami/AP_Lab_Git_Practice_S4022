@@ -21,6 +21,8 @@ public:
 		this->name = name;
 
 	}
+
+	//Person(const Person &p);
 	string& getName() { return name; }
     string getName() const {return name;}
 	int get_age()   {return age;}
@@ -54,6 +56,17 @@ public:
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
+
+	// Group(const Group &p)
+	// {
+	// 	size=p.size;
+	// 	cap=p.cap;
+	// 	for(int i=0 ; i< size ; i++)
+	// 	{
+	// 		members[i].name=p.members[i].name;
+	// 		members[i].age=p.members[i].age;
+	// 	}
+	// }
 
    // oprators part
    Group & operator=(Group const &obj);
@@ -117,6 +130,7 @@ public:
 };
 
 
+
 istream& operator>>(istream& in, Group& obj)
 {
        cout << "Enter size: ";
@@ -143,6 +157,10 @@ Group& Group::operator=(const Group& obj)
 {
     size= obj.size;
     cap = obj.cap;
+	for(int i=0 ;i<size ; i++)
+	{
+		 members[i]=obj.members[i];
+	}
     return *this;
 }
 
@@ -172,13 +190,16 @@ Group& Group:: operator +=(Group const &obj)
 
 Group & Group::operator+(Group const &obj)
 {
-	    for(int i=0 ; i<size ; i++)
-		{
-			
-		}
-        return *this;  
-}
 
+    for(int i=0 ; i<size ; i++)
+	{
+		     members[i].name=members[i].name + obj.members[i].name;
+			 members[i].age=members[i].age+obj.members[i].age;
+	}
+
+	return *this;
+           
+}
 
 
 int main()
@@ -186,7 +207,7 @@ int main()
 	
 	Person p1("somename");
 	Person p2("somename2");
-	//cout << p1<<endl<<p2;
+	cout << p1<<endl<<p2;
 	
 	
 	Group g1(5);
@@ -195,28 +216,23 @@ int main()
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	//cout<<isGroupFull(g1)<<endl;
+	cout<<isGroupFull(g1)<<endl;
 	
 	
 	Group g2(g1);
 	Group g3(10);
 	///cout << g1<<endl;//should cout every person in it with a \t as the separator
+	cout<<g1<<endl;
 	g2.deletePerson("Erfan");
-   // cout << g2 << endl;
-    
-	/*
-     Group g2(g1);
-     Group g3(10);
-     g2.deletePerson("Erfan");
-     cout << g1 << endl;
-     cout << g2 << endl;
-
-    */
+    cout << g2 << endl;
+   
 	
 	g3 = g1;
 	//cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
+	cout<<g3<<endl;
 	g3 += g3 += g3 += g3;
+	cout<<g3<<endl;
 	
 
 	Person persons[10];
@@ -231,9 +247,11 @@ int main()
 		cout<<persons[i].getName()<<' ';
 	}
 
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	 
+     
+	  if(find(persons,persons+10,Erfan)!=persons+10)
+	     cout<<*find(persons,persons+10,Erfan);
+
    return 0;
 }
 
