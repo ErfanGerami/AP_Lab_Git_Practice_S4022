@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 class Person {
@@ -24,6 +25,20 @@ public:
 	}
 	string& getName() { return name; }
 	string getName() const {return name;}
+	Person& operator = (const Person& p)
+	{
+		this->age = p.age;
+		this->name = p.name;
+		return *this;
+	}
+	bool operator > (const Person p) const
+	{
+		return name.compare(p.name) > 0;
+	}
+	bool operator < (const Person p) const
+	{
+		return name.compare(p.name) < 0;
+	}
 
 private:
 	string name;
@@ -165,7 +180,7 @@ int main()
 	Person p2("somename2");
 	cout << p1<<p2;
 */
-
+/*
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
@@ -188,22 +203,23 @@ int main()
 	g3 += g2;
 	cout << g3<<endl;
 	cout << g1;
-	
 
-	/*Person persons[10];
+	*/
+
+	Person persons[10];
 	Person Erfan("Erfan",20);
-	persons[1]=Erfan;
+	persons[1] = Erfan;
 	for(int i=0;i<10;i++){
-		persons[i].getName()=to_string(rand()%100);
+		persons[i].getName() = to_string(rand()%100);
 	}
 	sort(persons,persons+10);//what operator should be overloaded for sort? :)
 
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
-	}*/
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	}
+	
+	//cout<<*find(persons,persons+10,Erfan);
+	
 	
 
 
