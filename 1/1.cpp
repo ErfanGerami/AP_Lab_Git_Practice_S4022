@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 class Person {
@@ -21,7 +22,7 @@ public:
 	string& getName()  { return name; }
 	string getName()const { return name; }
 	friend class Group;
-
+	friend bool operator< (const Person&, const Person&);
 private:
 	string name;
 	int age;
@@ -32,7 +33,9 @@ ostream& operator<<(ostream& out, const Person& p) {
 	cout << p.getName();
 	return out;
 }
-
+bool operator< (const Person& p1, const Person& p2) {
+	return p1.name < p2.name;
+}
 
 
 class Group {
@@ -91,7 +94,7 @@ public:
 		*this = *this + g;
 		return *this;
 	}
-private:
+	private:
 	int size;
 	int cap;
 	Person* members;
@@ -107,7 +110,7 @@ ostream& operator<< (ostream& out, const Group& g) {
 	}
 	return out;
 }
-Group operator+(const Group& g1, const Group& g2) {
+Group operator+ (const Group& g1, const Group& g2) {
 	Group temp(g1.cap + g2.cap);
 	for (int i = 0; i < g1.size; i++) {
 		temp.members[i] = g1.members[i];
@@ -147,7 +150,7 @@ int main()
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 	cout << g3;
-	/*
+	
 	Person persons[10];
 	Person Erfan("Erfan",20);
 	persons[1]=Erfan;
@@ -158,7 +161,7 @@ int main()
 
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
-	}*/
+	}
 	/*
 	cout<<*find(persons,persons+10,Erfan);
 	*/
