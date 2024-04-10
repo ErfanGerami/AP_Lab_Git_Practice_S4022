@@ -32,5 +32,5 @@ void Score::setID_generator(int number)
 void print(const Score& score)
 {
 	string state[4] = {"GREAT", "GOOD", "NOTBAD", "BAD"};
-	cout << "ID : " << score.ID << "	score : " << score.score << "	"<< state[score.label] << "\tdetails : " << score.detail << '\n';
+	cout << "ID : " << score.ID << "	score : " << score.score << "\tdetails : " << score.detail << '\n';
 }
