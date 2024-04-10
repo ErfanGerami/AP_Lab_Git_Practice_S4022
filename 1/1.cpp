@@ -34,6 +34,10 @@ public:
     bool operator<(const Person& person) const {
         return name < person.name;
     }
+	bool operator==(const Person& person) const
+	{
+		return (person.name == name);
+	}
 
 	friend class Group;
 
@@ -127,10 +131,21 @@ public:
     }
 	Group& operator+=(const Group& g) {
         cap = size + g.size;
+		Person *tmp = new Person[cap];
+		for(int i = 0;i < size;++i)
+		{
+			tmp[i] = members[i];
+		}
+		members = new Person[cap];
+		for(int i = 0;i < size;++i)
+		{
+			members[i] = tmp[i];
+		}
         for (int i = size, j = 0; i < size + g.size; ++i, ++j) {
             members[i] = g.members[j];
             size++;
         }
+		delete []tmp;
         return *this;
     }
 
@@ -200,10 +215,10 @@ int main()
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
 	}
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
 	
+	cout<<*find(persons,persons+10,Erfan);
+	
+	return 0;
 }
 
 /* 	void sort(Person persons[10],Person EO_persons[10])
