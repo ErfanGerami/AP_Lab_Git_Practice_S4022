@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1712862646 source:c:\users\lenovo\desktop\ap_lab_git_practice_s4022\2\score\score.cpp
+	"Score.h"
+
+1712862612 c:\users\lenovo\desktop\ap_lab_git_practice_s4022\2\score\score.h
+	<iostream>
+	<string>
+
