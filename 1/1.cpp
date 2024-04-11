@@ -89,9 +89,7 @@ public:
 	// ~Group() {
 	// 	delete[] members;
 	// }
-	// ~Group() {
-	// 	delete[] members;
-	// }
+
     friend bool isGroupFull(Group g);
 
 private:
