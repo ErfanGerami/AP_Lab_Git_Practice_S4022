@@ -13,10 +13,11 @@ public:
 		BAD,
 	}Label;
 
+	Score(int score,  char* detail, Label label);
 	Score(int score, std::string detail, Label label);
 	Score();
 	Score(const Score& s);
-	Score(int score, char* detail, Label label);
+
 	void operator=(const Score& s);
 	static void setID_generator(int newID);
 	friend int main();

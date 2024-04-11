@@ -14,12 +14,14 @@ public:
 		this->name = name;
 
 	}
+	string& getName() { return name; }
+	const string getName() const{ return  name; }
+	
 	Person() {
 		this->name = "";
 		this->age = 0;
 	}
-	string& getName() { return name; }
-	const string getName() const{ return  name; }
+
 	bool operator==(const Person& p) {
 		return name == p.name && age == p.age;
 	}
