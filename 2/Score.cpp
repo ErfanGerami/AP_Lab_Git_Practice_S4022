@@ -36,6 +36,6 @@ int Score::setID_generator(int id) {
 void print(const Score& score) {
 	cout << "Score : " << score.score << endl;
 	cout << "Lable : " << score.label << endl;
-	cout << "Detial : " << score.detail;
-	cout << "ID : " << score.ID << endl << "----------------------------";
+	cout << "Detial : " << score.detail << endl;
+	cout << "ID : " << score.ID << endl << "----------------------------" << endl;
 }
