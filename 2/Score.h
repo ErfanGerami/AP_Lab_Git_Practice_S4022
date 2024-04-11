@@ -6,7 +6,6 @@ using namespace std;
 class Score {
 public:
 	Score();
-	Score(const Score& other);
 	friend void print(const Score& score);
 	void static setID_generator(int set_ID);
 	typedef enum {
@@ -17,6 +16,8 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	Score(int score, const char* detail, Label label);
+	Score& operator=(const Score& other);
 	friend int main();
 private:
 	int score;
