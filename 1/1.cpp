@@ -11,6 +11,7 @@ public:
 		this->name = name;
 
 	}
+	
 	string& getName()  { return name; }
 
 private:
@@ -71,20 +72,20 @@ bool isGroupFull(Group g) {
 
 int main()
 {
-	int a;
-	/*
+	
+	
 	Person p1("somename");
-	Person p1("somename2");
-	cout << p1<<p2;
-	*/
-	/*
+	Person p2("somename2");
+	cout<< p1.getName()<<p2.getName();
+	
+	
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
 	cout<<isGroupFull(g1)<<endl;
-	*/
+	
 	/*
 	Group g2(g1);
 	Group g3(10);
