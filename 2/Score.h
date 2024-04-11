@@ -1,6 +1,7 @@
+#pragma once
 #include <iostream>
 #include <string>
-using namespace std;
+using namespace std; 
 class Score {
 public:
 	friend void print(const Score& score);
@@ -13,6 +14,11 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	Score(int score, const char* detail, Label label);
+	Score();
+	Score& operator= (const Score&);
+	friend int main();
+	static int setID_generator(int);
 private:
 	int score;
 	Label label;
