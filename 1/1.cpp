@@ -10,6 +10,7 @@ public:
 		this->name = name;
 
 	}
+	Person(const string n, const int a) { name = n; age = a; }
 	Person() {}
 	string& getName() { return name; }
 	const string& getName()const { return name; }
@@ -33,6 +34,14 @@ public:
 		this->cap = max_lenght;
 		this->members = new Person[max_lenght];
 		this->size = 0;
+	}
+	Group(const Group& g)
+	{
+		this->cap = g.cap;
+		this->size = g.size;
+		this->members = new Person[this->size];
+		for (int i = 0; i < g.size; i++)
+			this->members[i] = g.members[i];
 	}
 	void add(Person p) {
 		if (this->size == this->cap) {
@@ -77,14 +86,14 @@ int main()
 	Person p2("somename2");
 	cout << p1 << p2;
 
-	/*
+
 	Group g1(5);
 	g1.add({ "Erfan",20 });
 	g1.add({ "Saba",20 });
 	g1.add({ "Mahrokh",20 });
 	g1.add({ "Yasin",21 });
-	cout<<isGroupFull(g1)<<endl;
-	*/
+	cout << isGroupFull(g1) << endl;
+
 	/*
 	Group g2(g1);
 	Group g3(10);
