@@ -39,7 +39,7 @@ public:
 	{
 		this->cap = g.cap;
 		this->size = g.size;
-		this->members = new Person[this->size];
+		this->members = new Person[this->cap];
 		for (int i = 0; i < g.size; i++)
 			this->members[i] = g.members[i];
 	}
@@ -61,6 +61,39 @@ public:
 			members[index] = members[index + 1];
 		}
 		size--;
+	}
+	Group operator +(const Group g)
+	{
+		Group result(this->cap + g.cap);
+		result.size = this->size + g.size;
+		for (int i = 0; i < this->size; i++)
+			result.members[i] = this->members[i];
+		for (int i = 0; i < g.size; i++)
+			result.members[i + this->size] = g.members[i];
+		return result;
+	}
+	Group operator +=(const Group g)
+	{
+		Group temp = *this;
+		this->cap += g.cap;
+		this->size += g.size;
+		delete[] this->members;
+		this->members = new Person[this->cap];
+		for (int i = 0; i < temp.size; i++)
+			this->members[i] = temp.members[i];
+		for (int i = 0; i < g.size; i++)
+			this->members[i + temp.size] = g.members[i];
+		return *this;
+	}
+	Group operator =(const Group g)
+	{
+		this->cap = g.cap;
+		this->size = g.size;
+		delete[] this->members;
+		this->members = new Person[this->cap];
+		for (int i = 0; i < this->size; i++)
+			this->members[i] = g.members[i];
+		return *this;
 	}
 	friend bool isGroupFull(Group g);
 	friend ostream& operator<<(ostream& out, const Group& g);
@@ -109,12 +142,12 @@ int main()
 	cout << g1 << endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
 
-	/*
+
 	g3 = g1;
 	cout << g3;
-	g3 =  g2 + g3;//adds members of g2 and g3 to each other
+	g3 = g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
-	*/
+
 	/*
 	Person persons[10];
 	Person Erfan("Erfan",20);
