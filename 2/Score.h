@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,6 +14,8 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	Score(int score, const char* detail, Label label);
+	Score();
 private:
 	int score;
 	Label label;
