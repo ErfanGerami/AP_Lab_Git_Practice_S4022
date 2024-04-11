@@ -5,7 +5,7 @@ using namespace std;
 class Score {
 public:
 	friend void print(const Score& score);
-	
+	friend int main();
 	typedef enum {
 		GREAT,
 		GOOD,
@@ -16,7 +16,7 @@ public:
 	Score(int score,  char* detail, Label label);
 	Score(int score, const char* detail, Label label);
 	Score();
-	void setID_generator(int input);
+	static void setID_generator(int input);
 private:
 	int score;
 	Label label;
