@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/hastiesmailzade/University/term 2/ap/workshop assignments/5th/AP_Lab_Git_Practice_S4022/2",
+      "program": "/Users/hastiesmailzade/University/term 2/ap/workshop assignments/5th/AP_Lab_Git_Practice_S4022/2/build/Debug/outDebug"
+    }
+  ]
+}

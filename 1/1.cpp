@@ -34,7 +34,7 @@ public:
 		swap(first.name, second.name);
 		swap(first.age, second.age);
 	}
-	bool operator==(const Person &person)
+	bool operator==(const Person &person) const
 	{
 		return (name == person.name);
 	}
@@ -108,6 +108,28 @@ public:
 		size += group.size;
 		return *this;
 	}
+	Group(const Group &other) : cap(other.cap), size(other.size), members(new Person[other.cap])
+	{
+		for (int i = 0; i < size; i++)
+		{
+			members[i] = other.members[i];
+		}
+	}
+	Group &operator=(const Group &other)
+	{
+		if (this != &other)
+		{
+			delete[] members;
+			cap = other.cap;
+			size = other.size;
+			members = new Person[cap];
+			for (int i = 0; i < size; i++)
+			{
+				members[i] = other.members[i];
+			}
+		}
+		return *this;
+	}
 	~Group()
 	{
 		delete[] members;
@@ -121,9 +143,9 @@ private:
 
 ostream &operator<<(ostream &out, const Group &p)
 {
-	for (int i; i < p.size; i++)
+	for (int i = 0; i < p.size; i++)
 	{
-		cout << p.members[i] << "\t";
+		out << p.members[i] << "\t";
 	}
 	return out;
 }
