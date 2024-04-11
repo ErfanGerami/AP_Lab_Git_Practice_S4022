@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 class Person {
@@ -14,6 +15,20 @@ public:
 	Person() {}
 	string& getName() { return name; }
 	const string& getName()const { return name; }
+	bool operator <(const Person p)
+	{
+		if (this->name < p.name)
+			return true;
+		else
+			return false;
+	}
+	bool operator ==(const Person p)
+	{
+		if (this->age == p.age)
+			return true;
+		else
+			return false;
+	}
 	friend class Group;
 private:
 	string name;
@@ -148,21 +163,21 @@ int main()
 	g3 = g2 + g3;//adds members of g2 and g3 to each other
 	g3 += g3 += g3 += g3;
 
-	
-	//Person persons[10];
-	//Person Erfan("Erfan",20);
-	//persons[1]=Erfan;
-	//for(int i=0;i<10;i++){
-	//	persons[i].getName()=to_string(rand()%100);
-	//}
-	//sort(persons,persons+10);//what operator should be overloaded for sort? :)
 
-	//for(int i=0;i<10;i++){
-	//	cout<<persons[i].getName()<<' ';
-	//}
-	/*
-	cout<<*find(persons,persons+10,Erfan);
-	*/
+	Person persons[10];
+	Person Erfan("Erfan", 20);
+	persons[1] = Erfan;
+	for (int i = 0; i < 10; i++) {
+		persons[i].getName() = to_string(rand() % 100);
+	}
+	sort(persons, persons + 10);//what operator should be overloaded for sort? :)
+
+	for (int i = 0; i < 10; i++) {
+		cout << persons[i].getName() << ' ';
+	}
+
+	cout << *find(persons, persons + 10, Erfan);
+
 
 
 
