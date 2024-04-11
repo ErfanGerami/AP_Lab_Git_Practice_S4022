@@ -23,6 +23,15 @@ public:
 
     const string& getName() const { return name; }
 
+    bool operator==(const Person &p) const {
+        return this->age == p.age && this->name == p.name;
+    }
+
+    bool operator<(const Person &p)const{
+       return this->age < p.age && this->name < p.name;
+    }
+
+
 private:
 	string name;
 	int age;
@@ -77,6 +86,7 @@ public:
 	    }
         return out;
     }
+
     friend Group operator+(const Group& g1, const Group& g2) {
         Group result(g1.cap + g2.cap);
         copy(g1.members, g1.members + g1.size, result.members);
@@ -84,12 +94,12 @@ public:
         result.size = min(g1.size + g2.size, result.cap);
         return result;
     }
-    friend Group& operator+=(const Group& g1, const Group& g2) {
-        Group result(g1.cap + g2.cap);
-        copy(g1.members, g1.members + g1.size, result.members);
-        copy(g2.members, g2.members + g2.size, result.members + g1.size);
-        result.size = min(g1.size + g2.size, result.cap);
-        return result;
+    friend Group& operator+=(Group& g1, const Group& g2) {
+        if (g1.size + g2.size <= g1.cap) {
+            copy(g2.members, g2.members + g2.size, g1.members + g1.size);
+            g1.size += g2.size;
+        }
+        return g1;
     }
 
 private:
@@ -108,7 +118,7 @@ int main()
 
 	Person p1("somename");
 	Person p2("somename2");
-	cout << p1<<p2;
+	cout << p1 << "\n" << p2 << endl;
 
 
 	Group g1(5);
@@ -144,13 +154,6 @@ int main()
 	}
 
 	cout<<*find(persons,persons+10,Erfan);
-
-
-
-
-
-
-
 
 
 
