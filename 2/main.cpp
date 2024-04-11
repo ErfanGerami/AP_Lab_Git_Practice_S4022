@@ -21,7 +21,7 @@ int main()
 
 	FOR(10) {
 		SETSCORE(i)
-		//why = betwean two scores raises an error?:)
+		//why  = betwean two scores raises an error?:)
 	}
 	FOR(10) {
 		print(scores[i]);
