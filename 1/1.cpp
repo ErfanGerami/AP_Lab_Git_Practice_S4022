@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -165,7 +164,7 @@ ostream& operator<<(ostream& out, Group& p) {
 	Person* ptmp = p.members;
 
 	for (int i = 0; i < p.size; i++) {
-		cout << p.members[i] << endl;
+		cout << p.members[i] << '\t';
 	}
 
 
@@ -232,4 +231,3 @@ int main()
 
 
 }
-
