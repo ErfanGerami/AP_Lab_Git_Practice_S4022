@@ -17,6 +17,7 @@ public:
 	Score(int score, const char* detail, Label label);
 	Score();
 	static void setID_generator(int input);
+	Score operator =(const Score s);
 private:
 	int score;
 	Label label;

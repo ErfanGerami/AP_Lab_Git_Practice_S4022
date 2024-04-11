@@ -8,7 +8,7 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 	ID_generator++;
 
 }
-Score::Score(int score, const char* detail, Label label) :ID(Score::ID_generator)
+Score::Score(int score, const char* detail, Label label) : ID(ID_generator)
 {
 	this->score = score;
 	this->label = label;
@@ -29,5 +29,16 @@ void Score::setID_generator(int input)
 	else
 		ID_generator -= ID_generator - input;
 }
-
+Score Score::operator =(const Score s)
+{
+	this->score = s.score;
+	this->detail = s.detail;
+	this->label = s.label;
+	return *this;
+}
+void print(const Score& score)
+{
+	cout << score.score << " ";
+}
+int Score::ID_generator = 0;
 
