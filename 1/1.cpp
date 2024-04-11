@@ -23,11 +23,18 @@ public:
 		this->name = name;
 
 	}
+	Person(const Person& obj) {
+		this->name=obj.name;
+		this->age=obj.age;
+
+	}
+
 	string& getName()  { return name; }
      string getName() const {return name;}
      int get_age()   {return age;}
 	   bool operator<(const Person& other) const;
 	   bool operator == (Person const &obj);
+	 Person & operator+(Person const &obj);
      friend class Group;
 private:
 	string name;
@@ -59,6 +66,13 @@ public:
 		this->members = new Person[max_lenght];
 		this->size = 0;
 	}
+
+	Group(const Group& obj) : size(obj.size), cap(obj.cap), members(new Person[obj.cap]) {
+    for (int i = 0; i < size; i++) {
+        members[i] = obj.members[i];
+    }
+   }
+	
 	void add(Person p) {
 		if (this->size == this->cap) {
 			return;
@@ -83,12 +97,12 @@ public:
      Group & operator=(Group const &obj);
     Group & operator +=(Group const &obj);
     Group & operator+(Group const &obj);
-      friend istream& operator>>(istream& in,Group& obj);
+    friend istream& operator>>(istream& in,Group& obj);
     friend ostream& operator<<(ostream& out, const Group& obj);
      
-	// ~Group() {
-	// 	delete[] members;
-	// }
+	~Group() {
+		delete[] members;
+	}
 
     friend bool isGroupFull(Group g);
 
@@ -123,7 +137,7 @@ Group& Group:: operator +=(Group const &obj)
 	{
            for(int i=0 ; i<size ; i++)
 		   {
-			members[i]=obj.members[i];
+			members[i]=members[i]+obj.members[i];
 		   }
     }
 
@@ -132,11 +146,18 @@ Group& Group:: operator +=(Group const &obj)
 		  size=obj.size;
 		  for(int i=0 ; i<size ; i++)
 		   {
-			members[i]=obj.members[i];
+			members[i]=members[i]+obj.members[i];
 		   }
 
 	}
 	return *this;
+}
+
+Person & Person ::operator+(Person const &obj)
+{
+           name=name+" "+obj.name;
+		   age=age + obj.age;
+	       return *this;           
 }
 
 Group & Group::operator+(Group const &obj)
@@ -195,14 +216,13 @@ int main()
 	
 	Group g2(g1);
 	Group g3(10);
-	///cout << g1<<endl;//should cout every person in it with a \t as the separator
-	cout<<g1<<endl;
 	g2.deletePerson("Erfan");
+	cout << g1<<endl;//should cout every person in it with a \t as the separator
     cout << g2 << endl;
    
 	
 	g3 = g1;
-	//cout << g3;
+	cout << g3<<endl;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
 	cout<<g3<<endl;
 	g3 += g3 += g3 += g3;
@@ -226,7 +246,5 @@ int main()
 	     cout<<*find(persons,persons+10,Erfan);
 
    return 0;
-
-
 }
 
