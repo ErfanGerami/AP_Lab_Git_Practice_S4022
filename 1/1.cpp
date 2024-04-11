@@ -97,7 +97,6 @@ public:
      Group & operator=(Group const &obj);
     Group & operator +=(Group const &obj);
     Group & operator+(Group const &obj);
-    friend istream& operator>>(istream& in,Group& obj);
     friend ostream& operator<<(ostream& out, const Group& obj);
      
 	~Group() {
@@ -171,14 +170,6 @@ Group & Group::operator+(Group const &obj)
 
 	return *this;
            
-}
-
-
-istream& operator>>(istream& in, Group& obj)
-{
-       cout << "Enter size: ";
-       in >> obj.size;
-       return in;
 }
 
 ostream& operator<<(ostream& out, const Group& obj)
