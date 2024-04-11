@@ -63,6 +63,7 @@ public:
 		size--;
 	}
 	friend bool isGroupFull(Group g);
+	friend ostream& operator<<(ostream& out, const Group& g);
 	~Group() {
 		delete[] members;
 	}
@@ -77,6 +78,13 @@ private:
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
 }
+
+ostream& operator<<(ostream& out, const Group& g) {
+	for (int i = 0; i < g.size; i++)
+		out << g.members[i] << "\t";
+	return out;
+}
+
 
 int main()
 {
@@ -94,13 +102,13 @@ int main()
 	g1.add({ "Yasin",21 });
 	cout << isGroupFull(g1) << endl;
 
-	/*
+
 	Group g2(g1);
 	Group g3(10);
 	g2.deletePerson("Erfan");
-	cout << g1<<endl;//should cout every person in it with a \t as the separator
+	cout << g1 << endl;//should cout every person in it with a \t as the separator
 	cout << g2 << endl;
-	*/
+
 	/*
 	g3 = g1;
 	cout << g3;
