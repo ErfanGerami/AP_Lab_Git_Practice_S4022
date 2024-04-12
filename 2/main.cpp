@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 
+int Score::ID_generator = 0; 
+
 using namespace std;
 #define FOR(n) for(int i=0;i<n;i++)
 #define SETSCORE(i) int score=rand()%20+1;/*no 0s*/\

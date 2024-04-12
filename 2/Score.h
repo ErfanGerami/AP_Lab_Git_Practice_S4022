@@ -15,12 +15,14 @@ public:
 	}Label; 
 
 	Score(int score, const char* detail, Label label);
+	Score(int score, const string detail, Label label);
 	Score();
 	void set_score(int _score);
 	void set_label(Label _label);
 	void set_detail(const string& _detail);
 	void setID_generator(int id_g);
-
+	Score operator=(const Score &scor);
+	
 	~Score();
 private:
 	int score;
