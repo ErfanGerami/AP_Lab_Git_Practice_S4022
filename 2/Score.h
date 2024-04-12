@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,6 +14,16 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+
+	Score(int score, const char* detail, Label label);
+
+	Score();
+
+	Score& operator=(const Score& _score);
+
+	friend void print(const Score& _score);
+	static void setID_generator(int id);
+	friend int main();
 private:
 	int score;
 	Label label;
