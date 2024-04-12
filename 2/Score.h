@@ -13,6 +13,7 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	Score();
 private:
 	int score;
 	Label label;
