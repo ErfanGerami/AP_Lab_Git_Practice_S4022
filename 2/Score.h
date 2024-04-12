@@ -20,6 +20,8 @@ public:
 	Score();
 
 	Score& operator=(const Score& _score);
+
+	friend void print(const Score& _score);
 	static void setID_generator(int id);
 	friend int main();
 private:

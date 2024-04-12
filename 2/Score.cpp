@@ -35,3 +35,8 @@ Score& Score::operator=(const Score& _score){
 void Score::setID_generator(int id) {
 	ID_generator = id;
 }
+
+void print (const Score& _score)
+{
+	cout << _score.detail << endl;
+}
