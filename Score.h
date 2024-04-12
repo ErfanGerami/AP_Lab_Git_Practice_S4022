@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 using namespace std;
@@ -21,6 +22,6 @@ private:
 	const int ID;
 	static int ID_generator;
 };
-
+void print(const Score&);
 
 
