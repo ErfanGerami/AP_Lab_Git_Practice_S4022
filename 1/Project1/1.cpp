@@ -39,6 +39,10 @@ public:
 	{
 		return name.compare(p.name) < 0;
 	}
+	bool operator == (const Person p)
+	{
+		return (age == p.age) && (name == p.name);
+	}
 
 private:
 	string name;
@@ -160,6 +164,19 @@ private:
 
 };
 
+Person* find(Person* start, Person* end, const Person& _person)
+{
+	Person* i;
+	for (i = start;i < end;i++)
+	{
+		if (*i == _person)
+		{
+			return i;
+		}
+	}
+	return NULL;
+}
+
 bool isGroupFull(Group g) {
 	return (g.size == g.cap);
 }
@@ -217,8 +234,14 @@ int main()
 	for(int i=0;i<10;i++){
 		cout<<persons[i].getName()<<' ';
 	}
+	//persons[9] = Erfan;
+	if (!find(persons, persons + 10, Erfan))
+	{
+		return 0;
+	}
+	cout << *find(persons, persons + 10, Erfan);
 	
-	//cout<<*find(persons,persons+10,Erfan);
+
 	
 	
 
