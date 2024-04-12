@@ -24,3 +24,12 @@ void print(const Score& score) {
 	cout << "\ndetail:" << score.detail;
 	cout << "\nID:" << score.ID;
 }
+Score& Score::operator=(const Score& p) {
+	if (this != &p)
+	{
+		this->label = p.label;
+		this->detail = p.detail;
+		this->score = p.score;
+	}
+	return *this;
+}

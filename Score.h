@@ -15,6 +15,7 @@ public:
 	Score();
 	Score(int score,  char* detail, Label label);
 	void static setID_generator(int id_generator);
+	Score& Score::operator=(const Score& p);
 private:
 	int score;
 	Label label;
