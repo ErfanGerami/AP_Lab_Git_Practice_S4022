@@ -23,6 +23,7 @@ Score::Score(int _score, const char* _detail, Label _label) : ID(Score::ID_gener
 Score::Score() : ID(Score::ID_generator) {
 	this->score =0;
 	this->detail = "";
+	this->label = GREAT;
 	ID_generator++;
 }
 
