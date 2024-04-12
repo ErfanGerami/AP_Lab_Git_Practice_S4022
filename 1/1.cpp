@@ -110,18 +110,15 @@ public:
 		for (; i < size; i++) {
 
 			tmp[i] = members[i];
-
 		}
 		for (; j < g.size; j++) {
 
 			tmp[i] = members[j];
 			i++;
-
 		}
 		members = tmp;
 		cap += g.cap;
 		size += g.size;
-
 		return *this;
 	}
 
