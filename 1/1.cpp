@@ -220,20 +220,3 @@ int main()
 	
 	return 0;
 }
-
-/* 	void sort(Person persons[10],Person EO_persons[10])
-	{
-		string tmp;
-		for(int i = 0;i < 10;++i)
-		{
-			for(int j = i+1;j < 10;++j)
-			{
-				if(persons[i].name > persons[j].name)
-				{
-					tmp = persons[i].name;
-					persons[i].name = persons[j].name;
-					persons[j].name = tmp;
-				}
-			}
-		}
-	} */
