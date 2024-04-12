@@ -71,6 +71,8 @@ bool isGroupFull(Group g) {
 
 int main()
 {
+
+
 	/*
 	Person p1("somename");
 	Person p1("somename2");
