@@ -19,7 +19,20 @@ public:
 	string& getName()  { return name; }
 	int getAge(){return age;}
 	const string& getName() const { return name; }
-	
+	void operator = (Person const p) {
+		this->name = p.name;
+		this->age = p.age;
+
+	}
+
+	bool operator < (Person const p) {
+		return ((this->name < p.name) ? true : false);
+	}
+
+	bool operator == (Person const p) {
+		return ((this->age == p.age && this->name == p.name) ? true : false);
+	}
+
 
 private:
 	string name;
@@ -64,7 +77,16 @@ public:
 		}
 		size--;
 	}
+     void operator = (Group const g) {
+		this->size = g.size;
+		this->cap = g.cap;
+		this->members = new Person[cap];
 
+		for (int i = 0; i < this->size; i++) {
+			this->members[i] = g.members[i];
+		}
+
+	}
 	~Group() {
 		delete[] members;
 	}
@@ -77,6 +99,8 @@ private:
 
 };
 Group operator+(Group  c1, Group  c2){
+	//Group c;
+
 	
 }
 ostream& operator<<(ostream& out,  Group& p) {
@@ -119,7 +143,7 @@ int main()
 	g3 = g1;
 	cout << g3;
 	g3 =  g2 + g3;//adds members of g2 and g3 to each other
-	g3 += g3 += g3 += g3;
+	//g3 += g3 += g3 += g3;
 	
 	Person persons[10];
 	Person Erfan("Erfan",20);
@@ -133,8 +157,10 @@ int main()
 		cout<<persons[i].getName()<<' ';
 	}
 	
-	cout<<*find(persons,persons+10,Erfan);
-	
+	if ((find(persons, persons + 10, Erfan)) >= persons + 10)
+		cout << "There is no person with this name.";
+	else
+		cout << (*find(persons, persons + 10, Erfan)).getName();
 	
 
 
