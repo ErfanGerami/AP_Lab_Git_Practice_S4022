@@ -12,7 +12,7 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 
 	ID_generator++;
 }
-Score::Score(int _score, const char* _detail , Label _label) : ID(Score :: ID_generator) {
+Score::Score(int _score, const char* _detail, Label _label) : ID(Score::ID_generator) {
 	this->score = _score;
 	this->label = _label;
 	this->detail = _detail;
