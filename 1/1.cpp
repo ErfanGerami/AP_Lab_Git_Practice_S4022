@@ -21,6 +21,20 @@ public:
 	
 	string& getName()  { return name; }
 	string getName ()const  {  return  name; }
+	Person operator+(const Person& other) const {
+    string newName = this->name + " " + other.name;
+    int newAge = this->age + other.age;
+    return Person(newName, newAge);
+   }
+	Person& operator+=(const Person& other) {
+    this->name += other.name;
+    this->age += other.age;
+    return *this;
+}
+
+
+	 
+	
 private:
 	string name;
 	int age;
@@ -70,13 +84,17 @@ public:
 	
 	friend bool isGroupFull(const Group& g);
 	friend ostream& operator<<(ostream& out, const Group G);
-	friend Group operator+(const Group& G1, const Group& G2);
-	Group& operator+=( const Group& G2) {
-	for (int i = 0; i < size && i < G2.size; i++) {
-     members[i] += G2.members[i];
-  }
-  return *this;
-}
+	friend class person;
+	Group operator+ (const Group& other) const {
+		for(int i=0 ; size>i && other.size>i ; i++ ){
+			members[i].operator+(other.members[i]);
+		}
+	}
+   Group& operator+=(const Group& other){
+	for(int i=0 ; size>i && other.size>i ; i++ ){
+			members[i].operator+=(other.members[i]);
+		}
+   }
 private:
 	int size;
 	int cap;
@@ -92,17 +110,6 @@ ostream& operator<<(ostream& out, const Group G) {
 		out << G.members[i];
 	}
 	return out;
-}
-Group operator+(const Group& G1, const Group& G2) {
-  Group result(G1.cap + G2.cap);
-  
-  for (int i = 0; i < G1.size && i < G2.size; i++) {
-    result.members[i] = G1.members[i] + G2.members[i];
-  }
-  
-  result.size = min(G1.size, G2.size);
-  
-  return result;
 }
 
 int main()
