@@ -13,7 +13,7 @@ scores[i] = Score( score,("some string " + to_string(i)).c_str(),Score::Label(3-
 
 int main()
 {
-	
+
 	srand(time(NULL));
 
 	Score s1(1, "do better next time", Score::BAD);
@@ -21,12 +21,11 @@ int main()
 
 	FOR(10) {
 		SETSCORE(i)
-		//why = betwean two scores raises an error?:)
+			//why = betwean two scores raises an error?:)
 	}
 	FOR(10) {
 		print(scores[i]);
 	}
-	Score::setID_generator(Score::ID_generator+100);//just a setter for ID_generator
+	Score::setID_generator(Score::ID_generator + 100);//just a setter for ID_generator
 
 }
-
