@@ -8,5 +8,11 @@ Score::Score(int score,char* detail, Label label) :ID(Score::ID_generator) {
 	ID_generator++;
 
 }
+Score::Score(){
+	this->score = -0;
+	
+	this->detail = "";
 
+	ID_generator=0;
+}
 

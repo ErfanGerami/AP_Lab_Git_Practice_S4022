@@ -13,14 +13,14 @@ scores[i] = Score( score,("some string " + to_string(i)).c_str(),Score::Label(3-
 
 int main()
 {
-	
+	int i;
 	srand(time(NULL));
 
 	Score s1(1, "do better next time", Score::BAD);
 	Score scores[10];//we have default constructor so we should be fine right?:)
 
 	FOR(10) {
-		SETSCORE(i)
+		SETSCORE(i);
 		//why = betwean two scores raises an error?:)
 	}
 	FOR(10) {
