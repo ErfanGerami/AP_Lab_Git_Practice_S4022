@@ -17,8 +17,8 @@ int main()
 	srand(time(NULL));
 
 	Score s1(1, "do better next time", Score::BAD);
+	print(s1);
 	Score scores[10];//we have default constructor so we should be fine right?:)
-
 	FOR(10) {
 		SETSCORE(i)
 		//why = betwean two scores raises an error?:)

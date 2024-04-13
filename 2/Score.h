@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 class Score {
 public:
 	friend void print(const Score& score);
@@ -12,7 +13,15 @@ public:
 		BAD,
 	}Label;
 
-	Score(int score,  char* detail, Label label);
+    Score();
+    Score(int score,  char* detail, Label label);
+	Score(int score,  const char* detail, Label label);
+	Score & operator =(const  Score & obj);
+    ~Score();
+	static void setID_generator(int x);
+	friend int main();
+	
+	
 private:
 	int score;
 	Label label;
@@ -20,6 +29,5 @@ private:
 	const int ID;
 	static int ID_generator;
 };
-
 
 
