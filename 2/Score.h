@@ -1,3 +1,6 @@
+#ifndef SCORE_H
+#define SCORE_H
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,6 +16,15 @@ public:
 	}Label;
 
 	Score(int score,  char* detail, Label label);
+	Score(int score,  string detail, Label label);
+	Score();
+
+	Score& operator=(const Score& he);
+
+	static void setID_generator(int nw);
+
+	friend int main();
+
 private:
 	int score;
 	Label label;
@@ -21,5 +33,6 @@ private:
 	static int ID_generator;
 };
 
+#endif
 
 
