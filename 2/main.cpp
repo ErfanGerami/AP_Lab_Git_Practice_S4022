@@ -1,9 +1,8 @@
-
 #include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "Score.h"
+//#include "Score.h"
 #include "SomeRandomDotHFile.h"
 using namespace std;
 #define FOR(n) for(int i=0;i<n;i++)
@@ -13,12 +12,11 @@ scores[i] = Score( score,("some string " + to_string(i)).c_str(),Score::Label(3-
 
 int main()
 {
-	
 	srand(time(NULL));
-
+	string a = "do better next time";
+	Score s2;
 	Score s1(1, "do better next time", Score::BAD);
 	Score scores[10];//we have default constructor so we should be fine right?:)
-
 	FOR(10) {
 		SETSCORE(i)
 		//why = betwean two scores raises an error?:)
@@ -26,7 +24,7 @@ int main()
 	FOR(10) {
 		print(scores[i]);
 	}
-	Score::setID_generator(Score::ID_generator+100);//just a setter for ID_generator
+	Score::setID_generator(Score::ID_generator + 100);//just a setter for ID_generator
 
 }
 
