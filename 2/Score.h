@@ -1,25 +1,33 @@
+#ifndef SCORE_H
+#define SCORE_H
 #include <iostream>
 #include <string>
 using namespace std;
-class Score {
+class Score
+{
 public:
-	friend void print(const Score& score);
-	
-	typedef enum {
-		GREAT,
-		GOOD,
-		NOTBAD,
-		BAD,
-	}Label;
+    Score();
+    friend void print(const Score &obj);
+    void static setID_generator(int setter);
+    typedef enum
+    {
+        GREAT,
+        GOOD,
+        NOTBAD,
+        BAD,
+    } Label;
 
-	Score(int score,  char* detail, Label label);
+    Score(int score, char *detail, Label label);
+    Score(int score, const char *detail, Label label);
+    Score &operator=(const Score &b);
+    friend int main();
+
 private:
-	int score;
-	Label label;
-	string detail;
-	const int ID;
-	static int ID_generator;
+    int score;
+    Label label;
+    string detail;
+    const int ID;
+    static int ID_generator;
 };
 
-
-
+#endif
